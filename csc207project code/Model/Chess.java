@@ -1,38 +1,44 @@
 package Model;
 
+import java.util.ArrayList;
+
 public abstract class Chess {
 
 	private Location location;
 	private String faction;
 	private boolean alive;
 	private String type;
-	public Chess(){
-		System.out.println("chess initialized");
+
+	/**
+	 * @param location
+	 * @param faction
+	 * @param type
+	 */
+	public Chess(Location location, String faction, String type) {
+		// TODO - implement Chess.Chess
+//		throw new UnsupportedOperationException();
+		this.location = location;
+		this.faction = faction;
+		this.type = type;
 	}
 
-	public void kill() {
+	public void kill(Chess chess) {
 		// TODO - implement Chess.kill
-		throw new UnsupportedOperationException();
+//		throw new UnsupportedOperationException();
+		int new_col = chess.location.getCol();
+		int new_row = chess.location.getRow();
+		this.location.setCol(new_col);
+		this.location.setRow(new_row);
+		chess.alive = false;
 	}
 
 	public String getType() {
 		return this.type;
 	}
 
-	/**
-	 * 
-	 * @param Location
-	 * @param faction
-	 * @param type
-	 */
-	public Chess(Location Location, String faction, String type) {
-		// TODO - implement Chess.Chess
-		throw new UnsupportedOperationException();
-	}
+	public String getFaction(){ return this.faction;}
 
-	public Location[] getNextPosition() {
-		// TODO - implement Chess.getNextPosition
-		throw new UnsupportedOperationException();
+	public Location getLocation() {
+		return this.location;
 	}
-
 }

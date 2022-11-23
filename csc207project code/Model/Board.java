@@ -1,14 +1,20 @@
 package Model;
+import Chesses.NullChess;
 
 public class Board {
 
 	private Chess[][] chessList;
 	private static Board board;
+	private int height = 10;
+	private int width = 9;
 
 	public boolean checkMate() {
 		// TODO - implement Board.checkMate
 		throw new UnsupportedOperationException();
 	}
+
+
+
 
 	public Chess[][] getChessList() {
 		return this.chessList;
@@ -23,6 +29,9 @@ public class Board {
 		// TODO - implement Board.setChessAt
 		throw new UnsupportedOperationException();
 	}
+
+
+	
 
 	/**
 	 * 
@@ -49,7 +58,34 @@ public class Board {
 
 	private Board() {
 		// TODO - implement Board.Board
-		throw new UnsupportedOperationException();
+//		throw new UnsupportedOperationException();
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				Location location = new Location(i, j);
+				chessList[i][j] = new Chesses.NullChess(location, null, null);
+			}
+		}
 	}
 
+
+	public void setChess(Chess chess, Location location){
+		int col = location.getCol();
+		int row = location.getRow();
+		chessList[row][col] = chess;
+	}
+
+
+
+
+
+
+	public int getheight(){
+		return this.height;
+	}
+
+
+
+	public int getwidth(){
+		return this.width;
+	}
 }
