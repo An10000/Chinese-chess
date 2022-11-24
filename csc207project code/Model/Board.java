@@ -89,7 +89,12 @@ public class Board {
 		StringBuilder ans = new StringBuilder();
 		for (int i = 0; i < height; i++){
 			for (int j = 0; j < width; j++){
-				ans.append("(").append(chessList[i][j].getFaction()).append(" ").append(chessList[i][j].getType()).append(")");
+				String stringToAdd = "";
+				stringToAdd = "(" + chessList[i][j].getFaction() + " " + chessList[i][j].getType() + ")";
+				while (stringToAdd.length() < 17){
+					stringToAdd += " ";
+				}
+				ans.append(stringToAdd);
 			}
 			ans.append("\n");
 		}
