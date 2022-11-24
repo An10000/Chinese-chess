@@ -8,6 +8,7 @@ public class InitializeBoard {
 	public InitializeBoard() {
 		// TODO - implement InitializeBoard.InitializeBoard
 //		throw new UnsupportedOperationException();
+		// chess instances. Red first, Black second.
 		Advisor red_advisor1 = new Advisor(new Location(9, 3), "Red", "Advisor");
 		Advisor red_advisor2 = new Advisor(new Location(9, 5), "Red", "Advisor");
 		Advisor black_advisor1 = new Advisor(new Location(0, 5), "Black", "Advisor");
@@ -48,53 +49,48 @@ public class InitializeBoard {
 		Soldier black_soldier4 = new Soldier(new Location(3, 6), "Black", "Soldier");
 		Soldier black_soldier5 = new Soldier(new Location(3, 8), "Black", "Soldier");
 
-
+		//put chess on the board, Red first, Black second
+		board = Board.getInstance();
+		//advisors
 		(board.getChessList())[red_advisor1.getLocation().getRow()][red_advisor1.getLocation().getCol()] = red_advisor1;
 		(board.getChessList())[red_advisor2.getLocation().getRow()][red_advisor2.getLocation().getCol()] = red_advisor2;
 		(board.getChessList())[black_advisor1.getLocation().getRow()][black_advisor1.getLocation().getCol()] = black_advisor1;
 		(board.getChessList())[black_advisor2.getLocation().getRow()][black_advisor2.getLocation().getCol()] = black_advisor2;
-
+		// cannons
 		(board.getChessList())[red_cannon1.getLocation().getRow()][red_cannon1.getLocation().getCol()] = red_cannon1;
 		(board.getChessList())[red_cannon2.getLocation().getRow()][red_cannon2.getLocation().getCol()] = red_cannon2;
 		(board.getChessList())[black_cannon1.getLocation().getRow()][black_cannon1.getLocation().getCol()] = black_cannon1;
 		(board.getChessList())[black_cannon2.getLocation().getRow()][black_cannon2.getLocation().getCol()] = black_cannon2;
-
+		// chariots 车
 		(board.getChessList())[red_chariot1.getLocation().getRow()][red_chariot1.getLocation().getCol()] = red_chariot1;
 		(board.getChessList())[red_chariot2.getLocation().getRow()][red_chariot2.getLocation().getCol()] = red_chariot2;
 		(board.getChessList())[black_chariot1.getLocation().getRow()][black_chariot1.getLocation().getCol()] = black_chariot1;
 		(board.getChessList())[black_chariot2.getLocation().getRow()][black_chariot2.getLocation().getCol()] = black_chariot2;
-
+		// elephants
 		(board.getChessList())[red_elephant1.getLocation().getRow()][red_elephant1.getLocation().getCol()] = red_elephant1;
 		(board.getChessList())[red_elephant2.getLocation().getRow()][red_elephant2.getLocation().getCol()] = red_elephant2;
 		(board.getChessList())[black_elephant1.getLocation().getRow()][black_elephant1.getLocation().getCol()] = black_elephant1;
 		(board.getChessList())[black_elephant2.getLocation().getRow()][black_elephant2.getLocation().getCol()] = black_elephant2;
-
+		// generals
 		(board.getChessList())[red_general1.getLocation().getRow()][red_general1.getLocation().getCol()] = red_general1;
 		(board.getChessList())[black_general1.getLocation().getRow()][black_general1.getLocation().getCol()] = black_general1;
-
+		// horses
 		(board.getChessList())[red_horse1.getLocation().getRow()][red_horse1.getLocation().getCol()] = red_horse1;
 		(board.getChessList())[red_horse2.getLocation().getRow()][red_horse2.getLocation().getCol()] = red_horse2;
 		(board.getChessList())[black_horse1.getLocation().getRow()][black_horse1.getLocation().getCol()] = black_horse1;
 		(board.getChessList())[black_horse2.getLocation().getRow()][black_horse2.getLocation().getCol()] = black_horse2;
-
-
+		// soldiers, red
 		(board.getChessList())[red_soldier1.getLocation().getRow()][red_soldier1.getLocation().getCol()] = red_soldier1;
 		(board.getChessList())[red_soldier2.getLocation().getRow()][red_soldier2.getLocation().getCol()] = red_soldier2;
 		(board.getChessList())[red_soldier3.getLocation().getRow()][red_soldier3.getLocation().getCol()] = red_soldier3;
 		(board.getChessList())[red_soldier4.getLocation().getRow()][red_soldier4.getLocation().getCol()] = red_soldier4;
 		(board.getChessList())[red_soldier5.getLocation().getRow()][red_soldier5.getLocation().getCol()] = red_soldier5;
-
-
+		// soldiers, black
 		(board.getChessList())[black_soldier1.getLocation().getRow()][black_soldier1.getLocation().getCol()] = black_soldier1;
 		(board.getChessList())[black_soldier2.getLocation().getRow()][black_soldier2.getLocation().getCol()] = black_soldier2;
 		(board.getChessList())[black_soldier3.getLocation().getRow()][black_soldier3.getLocation().getCol()] = black_soldier3;
 		(board.getChessList())[black_soldier4.getLocation().getRow()][black_soldier4.getLocation().getCol()] = black_soldier4;
 		(board.getChessList())[black_soldier5.getLocation().getRow()][black_soldier5.getLocation().getCol()] = black_soldier5;
-
-
-
-
-
 	}
 
 	public Board getBoard() {

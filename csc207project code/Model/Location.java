@@ -12,7 +12,9 @@ public class Location {
 	 */
 	public Location(int row, int col) {
 		// TODO - implement Location.Location
-		throw new UnsupportedOperationException();
+		this.row = row;
+		this.col = col;
+		// throw new UnsupportedOperationException();
 	}
 
 	public int getRow() {
