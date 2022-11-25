@@ -8,9 +8,7 @@ import java.util.HashMap;
 public class Scorer {
 
 	private HashMap<String, Integer> scoreBoard;
-	private Viewer viewer;
-	public Scorer(Viewer viewer){
-		this.viewer = viewer;
+	public Scorer(){
 		this.scoreBoard = new HashMap<>();
 	}
 

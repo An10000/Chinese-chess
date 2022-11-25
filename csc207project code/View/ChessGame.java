@@ -131,9 +131,9 @@ public class ChessGame {
 		scoredMode.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent actionEvent) {
+				Scorer scorer = new Scorer();
+				Viewer viewer1 = new Viewer("Scored Mode", board, stage, scorer);
 
-				Viewer viewer1 = new Viewer("Scored Mode", board, stage);
-				Scorer scorer = new Scorer(viewer1);
 			}
 		});
 		borderPane.setTop(controls);
