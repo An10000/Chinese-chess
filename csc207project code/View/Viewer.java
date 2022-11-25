@@ -2,6 +2,8 @@ package View;
 
 import Model.*;
 import Control.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,12 +16,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import model.TetrisModel;
 
 public class Viewer {
 
 	private String mode;
 	private int time;
+
+	private Timeline timeline;
+
 	private Controller controller;
+	private Timer timer;
+	private Scorer scorer;
 	private String round;
 	private Stage stage;
 	private Board board;
@@ -40,6 +49,15 @@ public class Viewer {
 		initUI();
 	}
 
+	public Viewer(String mode, Board board, Stage stage, Scorer scorer) {
+		this.mode = mode;
+		this.board = board;
+		this.stage = stage;
+		this.round = "Red";
+		this.scorer = scorer;
+		initUI();
+	}
+
 	/**
 	 * 
 	 * @param mode
@@ -51,7 +69,7 @@ public class Viewer {
 		this.board = board;
 		this.stage = stage;
 		this.round = "Red";
-		Timer timer = new Timer(time, this);
+		this.timer = new Timer(time, this, this.stage);
 		initUI();
 	}
 
@@ -90,6 +108,10 @@ public class Viewer {
 		}
 		vBox.setPadding(new Insets(20, 20, 20, 20));
 		vBox.setAlignment(Pos.TOP_CENTER);
+
+		timeline = new Timeline(new KeyFrame(Duration.seconds(0.25), e -> updateBoard()));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
 
 		borderPane.setTop(controls);
 		borderPane.setRight(vBox);
@@ -130,15 +152,21 @@ public class Viewer {
 		return this.round;
 	}
 
+	private void updateBoard() {
+		switch (mode) {
+			case "Timed Mode" -> drawTimer();
+			case "Scored Mode" -> drawScorer();
+		}
+	}
 	/**
 	 * 
-	 * @param timer
+	 * @param
 	 */
-	public void drawTimer(Timer timer) {
+	public void drawTimer() {
 		label.setText(String.format("Countdown: %d", timer.getCounter()));
 	}
 
-	public void drawScorer(Scorer scorer) {
+	public void drawScorer() {
 		label.setText(String.format("Red Score: %d" + "\nBlack Score: %d", scorer.getFactionScore("Red"), scorer.getFactionScore("Black")));
 	}
 
