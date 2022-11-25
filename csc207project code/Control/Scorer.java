@@ -1,12 +1,18 @@
 package Control;
 
 import Model.*;
+import View.Viewer;
 
 import java.util.HashMap;
 
 public class Scorer {
 
 	private HashMap<String, Integer> scoreBoard;
+	private Viewer viewer;
+	public Scorer(Viewer viewer){
+		this.viewer = viewer;
+		this.scoreBoard = new HashMap<>();
+	}
 
 	/**
 	 * 

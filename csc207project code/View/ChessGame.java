@@ -1,5 +1,6 @@
 package View;
 
+import Control.Scorer;
 import Model.Board;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -130,7 +131,9 @@ public class ChessGame {
 		scoredMode.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent actionEvent) {
+
 				Viewer viewer1 = new Viewer("Scored Mode", board, stage);
+				Scorer scorer = new Scorer(viewer1);
 			}
 		});
 		borderPane.setTop(controls);
