@@ -10,6 +10,8 @@ public class Scorer {
 	private HashMap<String, Integer> scoreBoard;
 	public Scorer(){
 		this.scoreBoard = new HashMap<>();
+		scoreBoard.put("Red", 0);
+		scoreBoard.put("Black", 0);
 	}
 
 	/**
