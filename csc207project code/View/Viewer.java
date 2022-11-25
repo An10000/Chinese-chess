@@ -52,6 +52,7 @@ public class Viewer {
 		this.stage = stage;
 		this.round = "Red";
 		Timer timer = new Timer(time, this);
+		initUI();
 	}
 
 	private void initUI() {
