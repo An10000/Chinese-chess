@@ -1,9 +1,12 @@
-package View;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import View.*;
+
 public class Main extends Application {
+
+	private ChessGame chessGame;
+	private Stage stage;
 
 	/**
 	 * Main method
@@ -17,7 +20,9 @@ public class Main extends Application {
 	}
 	@Override
 	public void start(Stage stage) throws Exception {
-		ChessGame chessGame = new ChessGame(stage);
+		this.stage = stage;
+		chessGame = new ChessGame(stage);
+
 	}
 
 }
