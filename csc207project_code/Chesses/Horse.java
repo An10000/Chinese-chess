@@ -2,6 +2,7 @@ package Chesses;
 import Model.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Horse extends Chess implements Moveable, getNextPosition {
 
@@ -15,17 +16,93 @@ public class Horse extends Chess implements Moveable, getNextPosition {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param destination
 	 * @param board
 	 */
 	public void move(Location destination, Board board) {
 		// TODO - implement Horse.move
-		throw new UnsupportedOperationException();
+		board.removeChessAt(getLocation());
+		board.setChessAt(this, destination);
 	}
 
 	@Override
 	public ArrayList<Location> getNextPosition(Board board) {
-		return null;
+		ArrayList<Location> locations = new ArrayList<>();
+		ArrayList<ArrayList<Integer>> lst_index = new ArrayList<>();
+		ArrayList<Integer> move_index1 = new ArrayList<>(Arrays.asList(2, 1));
+		ArrayList<Integer> move_index2 = new ArrayList<>(Arrays.asList(2, -1));
+		ArrayList<Integer> move_index3 = new ArrayList<>(Arrays.asList(-2, 1));
+		ArrayList<Integer> move_index4 = new ArrayList<>(Arrays.asList(-2, -1));
+		ArrayList<Integer> move_index5 = new ArrayList<>(Arrays.asList(1, 2));
+		ArrayList<Integer> move_index6 = new ArrayList<>(Arrays.asList(-1, 2));
+		ArrayList<Integer> move_index7 = new ArrayList<>(Arrays.asList(1, -2));
+		ArrayList<Integer> move_index8 = new ArrayList<>(Arrays.asList(-1, -2));
+		lst_index.add(move_index1);
+		lst_index.add(move_index2);
+		lst_index.add(move_index3);
+		lst_index.add(move_index4);
+		lst_index.add(move_index5);
+		lst_index.add(move_index6);
+		lst_index.add(move_index7);
+		lst_index.add(move_index8);
+
+		for (ArrayList<Integer> moveindex: lst_index) {
+			//new location
+			Location new_location = new Location(
+					getLocation().getRow() + moveindex.get(0),
+					getLocation().getCol() + moveindex.get(1));
+
+			if (new_location.getRow() <= 9
+					&& new_location.getRow() >= 0
+					&& new_location.getCol() <= 8
+					&& new_location.getCol() >= 0
+					&& board.getChessAt(new_location).getType() == null) {
+				//Forward
+				if (moveindex.get(0) == -2 && (moveindex.get(1) == 1 || moveindex.get(1) == -1)){
+					Location bad_location = new Location(getLocation().getRow() - 1, getLocation().getCol());
+					if (board.getChessAt(bad_location).getType() == null){
+						locations.add(new_location);
+					}
+				}
+				//Backward
+				if (moveindex.get(0) == 2 && (moveindex.get(1) == 1 || moveindex.get(1) == -1)){
+					Location bad_location = new Location(getLocation().getRow() + 1, getLocation().getCol());
+					if (board.getChessAt(bad_location).getType() == null){
+						locations.add(new_location);
+					}
+				}
+				//left
+				if (moveindex.get(1) == -2 && (moveindex.get(0) == 1 || moveindex.get(0) == -1)){
+					Location bad_location = new Location(getLocation().getRow(), getLocation().getCol() - 1);
+					if (board.getChessAt(bad_location).getType() == null){
+						locations.add(new_location);
+					}
+				}
+				//right
+				if (moveindex.get(1) == 2 && (moveindex.get(0) == 1 || moveindex.get(0) == -1)){
+					Location bad_location = new Location(getLocation().getRow(), getLocation().getCol() + 1);
+					if (board.getChessAt(bad_location).getType() == null){
+						locations.add(new_location);
+					}
+				}
+			}
+
+			if (getFaction().equalsIgnoreCase("red")
+					&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("black")){
+				locations.add(new_location);
+			}
+
+			else if (getFaction().equalsIgnoreCase("black")
+					&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("red")) {
+				locations.add(new_location);
+			}
+
+
+		}
+
+		return locations;
+
+
 	}
 }
