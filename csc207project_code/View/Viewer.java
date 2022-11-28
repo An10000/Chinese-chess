@@ -24,6 +24,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.TetrisModel;
+import org.w3c.dom.css.RGBColor;
 
 public class Viewer {
 
@@ -84,7 +85,7 @@ public class Viewer {
 		BorderPane borderPane = new BorderPane();
 		borderPane.setStyle("-fx-background-color: #121212;");
 
-		Image chessBoard = new Image("View/chessBoard.png", 600, 750, true, true);
+		Image chessBoard = new Image("View/Graphics/chessBoard.png", 600, 750, true, true);
 
 		BackgroundSize backgroundSize = new BackgroundSize(600, 750, true, true, true, false);
 
@@ -98,34 +99,39 @@ public class Viewer {
 		anchorPane.setBackground(new Background(backgroundImage));
 
 		Button bt = new Button();
-		bt.setShape(new Circle(30));
-		bt.setMaxSize(60,60);
-		bt.setMinSize(60,60);
-		Image chess = new Image("View/chess.jpeg",60,60,true,true);
-		ImageView chessview = new ImageView(chess);
-		bt.setGraphic(chessview);
+		bt.setShape(new Circle(35));
+		bt.setMaxSize(70,70);
+		bt.setMinSize(70,70);
+		Image chess = new Image("View/Graphics/chess.png",75,75,true,true);
+		ImageView chessView = new ImageView(chess);
+		bt.setGraphic(chessView);
+
 
 		Button bt_2 = new Button();
-		bt_2.setShape(new Circle(30));
-		bt_2.setMaxSize(60, 60);
-		bt_2.setMinSize(60,60);
+		bt_2.setShape(new Circle(35));
+		bt_2.setMaxSize(70, 70);
+		bt_2.setMinSize(70,70);
+		bt_2.setStyle("-fx-background-color: rgba(0,0,0,0)");
+
 
 		Button bt_3 = new Button();
-		bt_3.setShape(new Circle(30));
-		bt_3.setMaxSize(60, 60);
-		bt_3.setMinSize(60,60);
+		bt_3.setShape(new Circle(35));
+		bt_3.setMaxSize(70, 70);
+		bt_3.setMinSize(70,70);
 
-		bt.setOnAction(e -> {
+		bt_2.setOnAction(e -> {
 			nextRound();
 		});
 
 		anchorPane.getChildren().addAll(bt, bt_2, bt_3);
-		AnchorPane.setTopAnchor(bt, 65.0);
-		AnchorPane.setLeftAnchor(bt, 302.0);
-		AnchorPane.setTopAnchor(bt_2, 65.0);
-		AnchorPane.setLeftAnchor(bt_2, 237.0);
+		AnchorPane.setTopAnchor(bt, 15.0);
+		AnchorPane.setLeftAnchor(bt, 270.0);
+		AnchorPane.setTopAnchor(bt_2, 15.0);
+		AnchorPane.setLeftAnchor(bt_2, 192.0);
 		AnchorPane.setTopAnchor(bt_3, 130.0);
 		AnchorPane.setLeftAnchor(bt_3, 237.0);
+
+
 
 		switch (mode) {
 			case "Timed Mode" -> {
