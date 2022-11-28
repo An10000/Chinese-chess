@@ -42,7 +42,6 @@ public class Advisor extends Chess implements Moveable, getNextPosition{
 			if (getFaction().equalsIgnoreCase("red")) {
 				Location location = new Location(this.getLocation().getRow() + move_index.get(0)
 						, this.getLocation().getCol() + move_index.get(1));
-				System.out.println(location);
 				if ((this.getLocation().getRow() + move_index.get(0) <= 9
 						&& this.getLocation().getRow() + move_index.get(0) >= 8
 						&& this.getLocation().getCol() + move_index.get(1) >= 3
