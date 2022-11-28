@@ -11,8 +11,18 @@ public class Board {
 	private int width = 9;
 
 	public boolean checkMate() {
-		// TODO - implement Board.checkMate
-		throw new UnsupportedOperationException();
+		for (Chess[] chessrow: chessList){
+			for (Chess chess: chessrow){
+				for (Location location: chess.getNextPosition(this)){
+					if (this.getChessAt(location).getType().equals("General")){
+						if (!this.getChessAt(location).getFaction().equals(chess.getFaction())){
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public Chess[][] getChessList() {
@@ -25,16 +35,18 @@ public class Board {
 	 * @param location
 	 */
 	public void setChessAt(Chess chess, Location location) {
-		// TODO - implement Board.setChessAt
-		throw new UnsupportedOperationException();
+		int col = location.getCol();
+		int row = location.getRow();
+		chessList[row][col] = chess;
 	}
 	/**
 	 * 
 	 * @param location
 	 */
 	public Chess getChessAt(Location location) {
-		// TODO - implement Board.getChessAt
-		throw new UnsupportedOperationException();
+		int col = location.getCol();
+		int row = location.getRow();
+		return chessList[row][col];
 	}
 
 	/**
@@ -42,8 +54,10 @@ public class Board {
 	 * @param location
 	 */
 	public void removeChessAt(Location location) {
-		// TODO - implement Board.removeChessAt
-		throw new UnsupportedOperationException();
+		int col = location.getCol();
+		int row = location.getRow();
+		Chess oldChess = chessList[row][col];
+		chessList[row][col] = new NullChess(location, oldChess.getFaction(),oldChess.getType());
 	}
 
 	public static Board getInstance() {
