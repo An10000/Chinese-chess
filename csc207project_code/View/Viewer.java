@@ -24,7 +24,6 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.TetrisModel;
-import org.w3c.dom.css.RGBColor;
 
 public class Viewer {
 
@@ -98,40 +97,7 @@ public class Viewer {
 		AnchorPane anchorPane = new AnchorPane();
 		anchorPane.setBackground(new Background(backgroundImage));
 
-		Button bt = new Button();
-		bt.setShape(new Circle(35));
-		bt.setMaxSize(70,70);
-		bt.setMinSize(70,70);
-		Image chess = new Image("View/Graphics/chess.png",75,75,true,true);
-		ImageView chessView = new ImageView(chess);
-		bt.setGraphic(chessView);
-
-
-		Button bt_2 = new Button();
-		bt_2.setShape(new Circle(35));
-		bt_2.setMaxSize(70, 70);
-		bt_2.setMinSize(70,70);
-		bt_2.setStyle("-fx-background-color: rgba(0,0,0,0)");
-
-
-		Button bt_3 = new Button();
-		bt_3.setShape(new Circle(35));
-		bt_3.setMaxSize(70, 70);
-		bt_3.setMinSize(70,70);
-
-		bt_2.setOnAction(e -> {
-			nextRound();
-		});
-
-		anchorPane.getChildren().addAll(bt, bt_2, bt_3);
-		AnchorPane.setTopAnchor(bt, 15.0);
-		AnchorPane.setLeftAnchor(bt, 270.0);
-		AnchorPane.setTopAnchor(bt_2, 15.0);
-		AnchorPane.setLeftAnchor(bt_2, 192.0);
-		AnchorPane.setTopAnchor(bt_3, 130.0);
-		AnchorPane.setLeftAnchor(bt_3, 237.0);
-
-
+		ButtonFactory buttonFactory = new ButtonFactory(anchorPane);
 
 		switch (mode) {
 			case "Timed Mode" -> {
