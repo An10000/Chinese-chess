@@ -23,8 +23,6 @@ import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.TetrisModel;
-import org.w3c.dom.css.RGBColor;
 
 public class Viewer {
 

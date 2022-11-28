@@ -41,4 +41,25 @@ public class Location {
 		this.col = col;
 	}
 
+
+
+	public String toString(){
+		return "(" + getRow() + ", " + getCol() + ")"; // print location
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj){
+			return true;}
+		if (!(obj instanceof Location)){
+			return false;
+		}
+		Location other = (Location) obj;
+		if (this.row == other.row && this.col == other.col){
+			return true;
+		}
+		return false;
+
+	}
 }

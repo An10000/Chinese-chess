@@ -12,14 +12,19 @@ public class Advisor extends Chess implements Moveable, getNextPosition{
 		super(location, faction, type);
 	}
 	/**
-	 * 
+	 *
 	 * @param destination
 	 * @param board
 	 */
 	public void move(Location destination, Board board) {
 		// TODO - implement Advisor.move
-		throw new UnsupportedOperationException();
+		board.removeChessAt(getLocation());
+		board.setChessAt(this, destination);
 	}
+
+
+
+
 
 	@Override
 	public ArrayList<Location> getNextPosition(Board board) {
@@ -38,10 +43,11 @@ public class Advisor extends Chess implements Moveable, getNextPosition{
 				Location location = new Location(this.getLocation().getRow() + move_index.get(0)
 						, this.getLocation().getCol() + move_index.get(1));
 				if ((this.getLocation().getRow() + move_index.get(0) <= 9
-						|| this.getLocation().getRow() + move_index.get(0) >= 8
-						|| this.getLocation().getCol() + move_index.get(1) >= 3
-						|| this.getLocation().getCol() + move_index.get(1) <= 5)
-						&& (board.getChessAt(location).getType().equalsIgnoreCase("red"))) {
+						&& this.getLocation().getRow() + move_index.get(0) >= 8
+						&& this.getLocation().getCol() + move_index.get(1) >= 3
+						&& this.getLocation().getCol() + move_index.get(1) <= 5)
+						&& ( board.getChessAt(location).getFaction() == null
+								||board.getChessAt(location).getFaction().equalsIgnoreCase("Black"))) {
 
 					locations.add(location);
 				}
@@ -51,10 +57,11 @@ public class Advisor extends Chess implements Moveable, getNextPosition{
 				Location location = new Location(this.getLocation().getRow() + move_index.get(0)
 						, this.getLocation().getCol() + move_index.get(1));
 				if (this.getLocation().getRow() + move_index.get(0) <= 2
-						|| this.getLocation().getRow() + move_index.get(0) >= 0
-						|| this.getLocation().getCol() + move_index.get(1) >= 3
-						|| this.getLocation().getCol() + move_index.get(1) <= 5
-						&& (board.getChessAt(location).getType().equalsIgnoreCase("black"))) {
+						&& this.getLocation().getRow() + move_index.get(0) >= 0
+						&& this.getLocation().getCol() + move_index.get(1) >= 3
+						&& this.getLocation().getCol() + move_index.get(1) <= 5
+						&& ( board.getChessAt(location).getFaction() == null
+						||board.getChessAt(location).getFaction().equalsIgnoreCase("Red"))) {
 					locations.add(location);
 				}
 			}
