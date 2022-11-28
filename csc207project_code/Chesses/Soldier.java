@@ -16,14 +16,16 @@ public class Soldier extends Chess implements Moveable, getNextPosition {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param destination
 	 * @param board
 	 */
 	public void move(Location destination, Board board) {
 		// TODO - implement Soldier.move
-		throw new UnsupportedOperationException();
+		board.removeChessAt(getLocation());
+		board.setChessAt(this, destination);
 	}
+
 
 	@Override
 	public ArrayList<Location> getNextPosition(Board board) {

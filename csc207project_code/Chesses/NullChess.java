@@ -1,6 +1,8 @@
 package Chesses;
 import Model.*;
 
+import java.util.ArrayList;
+
 public class NullChess extends Chess{
 
 
@@ -16,8 +18,11 @@ public class NullChess extends Chess{
      * @param board
      */
     public void move(Location destination, Board board) {
-        // TODO - implement General.move
         throw new UnsupportedOperationException();
+    }
+
+    public ArrayList<Location> getNextPosition(Board board) {
+        return new ArrayList<Location>();
     }
 
 }
