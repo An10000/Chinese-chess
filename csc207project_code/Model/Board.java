@@ -39,6 +39,7 @@ public class Board {
 	public void setChessAt(Chess chess, Location location) {
 		int col = location.getCol();
 		int row = location.getRow();
+		chess.setLocation(location);
 		chessList[row][col] = chess;
 	}
 	/**

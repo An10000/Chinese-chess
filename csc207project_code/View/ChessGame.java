@@ -20,23 +20,25 @@ import javafx.stage.Stage;
 
 public class ChessGame {
 
-	private String mode;
+	private String mode;// mode of the game
+
+//	/**
+//	 *
+//	 * @param mode
+//	 */
+//	public void startGame(String mode) {
+//		// TODO - implement ChessGame.startGame
+//		throw new UnsupportedOperationException();
+//	}
 
 	/**
-	 * 
-	 * @param mode
-	 */
-	public void startGame(String mode) {
-		// TODO - implement ChessGame.startGame
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 *
+	 * Initialize a ChessGame.
+	 * It starts with a window asking the user which mode they want to play,
+	 * and the user selects one mode, we start the game.
+	 * @param stage the window which the mode selection will be happening.
 	 */
 	public ChessGame(Stage stage) {
-		// TODO - implement ChessGame.ChessGame
+
 		Board board = Board.getInstance();
 
 		stage.setTitle("Chinese Chess");
