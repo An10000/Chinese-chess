@@ -9,9 +9,10 @@ public class Board {
 	private static Board board;
 	private int height = 10;
 	private int width = 9;
-
+	/**
+	 * Check if the general is out of the way.
+	 */
 	public boolean checkMate() {
-		// Check if the general is out of the way.
 		for (Chess[] chessrow: chessList){
 			for (Chess chess: chessrow){
 				for (Location location: chess.getNextPosition(this)){
@@ -31,33 +32,30 @@ public class Board {
 	}
 
 	/**
-	 *
+	 * put chess at location
 	 * @param chess
 	 * @param location
 	 */
 	public void setChessAt(Chess chess, Location location) {
-		// put chess at location
 		int col = location.getCol();
 		int row = location.getRow();
 		chessList[row][col] = chess;
 	}
 	/**
-	 *
+	 * return the chess at location
 	 * @param location
 	 */
 	public Chess getChessAt(Location location) {
-		// return the chess at location
 		int col = location.getCol();
 		int row = location.getRow();
 		return chessList[row][col];
 	}
 
 	/**
-	 *
+	 * Set the chess on the position as an empty chess (NullChess).
 	 * @param location
 	 */
 	public void removeChessAt(Location location) {
-		// Set the chess on the position as an empty chess (NullChess).
 		int col = location.getCol();
 		int row = location.getRow();
 		Chess oldChess = chessList[row][col];
@@ -65,7 +63,6 @@ public class Board {
 	}
 
 	public static Board getInstance() {
-		// TODO - implement Board.getInstance
 		if (Board.board == null){
 			Board.board = new Board();
 			return Board.board;
@@ -73,12 +70,9 @@ public class Board {
 		else{
 			return Board.board;
 		}
-		//throw new UnsupportedOperationException();
 	}
 
 	private Board() {
-		// TODO - implement Board.Board
-//  throw new UnsupportedOperationException();
 		chessList = new Chess[height][width];
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
