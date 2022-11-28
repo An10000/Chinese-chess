@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public abstract class Chess implements getNextPosition{
+public abstract class Chess implements Moveable, getNextPosition{
 
 	private Location location;
 	private String faction;
