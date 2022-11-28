@@ -57,7 +57,6 @@ public abstract class Chess implements Moveable, getNextPosition{
 	public Location getLocation() {
 		return this.location;
 	}
-
 	/**
 	 * setter method for location
 	 * @param location the location to be set on

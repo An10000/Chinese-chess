@@ -91,6 +91,29 @@ public class InitializeBoard {
 		(board.getChessList())[black_soldier3.getLocation().getRow()][black_soldier3.getLocation().getCol()] = black_soldier3;
 		(board.getChessList())[black_soldier4.getLocation().getRow()][black_soldier4.getLocation().getCol()] = black_soldier4;
 		(board.getChessList())[black_soldier5.getLocation().getRow()][black_soldier5.getLocation().getCol()] = black_soldier5;
+
+
+//		Location location = new Location(1, 0);
+//		Location location1 = new Location(1, 1);
+//		Location location2 = new Location(1, 2);
+//		Location location3 = new Location(1, 3);
+//		Location location4 = new Location(1, 4);
+//		Location location5 = new Location(1, 5);
+//		Location location6 = new Location(1, 6);
+//		Location location7 = new Location(1, 7);
+//		Location location8 = new Location(1, 8);
+//
+//		Location location9 = new Location(2, 0);
+//		Location location10 = new Location(2, 0);
+//		Location location11 = new Location(2, 0);
+//		Location location12 = new Location(2, 0);
+//		Location location13 = new Location(2, 0);
+//		Location location14 = new Location(2, 0);
+//		Location location15 = new Location(2, 0);
+
+
+
+		
 	}
 
 	public Board getBoard() {
