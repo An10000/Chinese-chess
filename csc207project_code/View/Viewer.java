@@ -23,6 +23,7 @@ import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.TetrisModel;
 
 public class Viewer {
 
@@ -42,11 +43,13 @@ public class Viewer {
 	private Label label;
 
 	/**
-	 * 
-	 * @param mode
-	 * @param board
+	 * Initializer of Viewer with Classic Mode.
+	 * @param mode 	A string that represent the game mode currently playing.
+	 * @param board  The board that players are playing.
+	 * @param controller The controller that control the game.
+	 * @param stage	 The stage that is used to build visualization.
 	 */
-	public Viewer(String mode, Board board, Stage stage) {
+	public Viewer(String mode, Board board, Controller controller, Stage stage) {
 		this.mode = mode;
 		this.board = board;
 		this.stage = stage;
@@ -54,7 +57,15 @@ public class Viewer {
 		initUI();
 	}
 
-	public Viewer(String mode, Board board, Stage stage, Scorer scorer) {
+	/**
+	 * Initializer of Viewer with Scored Mode.
+	 * @param mode  A string that represent the game mode currently playing.
+	 * @param board  The board that players are playing.
+	 * @param controller  The controller that control the game.
+	 * @param stage  The stage that is used to build visualization.
+	 * @param scorer  The scorer that will record the score during the game.
+	 */
+	public Viewer(String mode, Board board, Controller controller, Stage stage, Scorer scorer) {
 		this.mode = mode;
 		this.board = board;
 		this.stage = stage;
@@ -64,22 +75,27 @@ public class Viewer {
 	}
 
 	/**
-	 * 
-	 * @param mode
-	 * @param board
-	 * @param time
+	 * Initializer of Viewer with Timed Mode.
+	 * @param mode  A string that represent the game mode currently playing.
+	 * @param board  The board that players are playing.
+	 * @param controller  The controller that control the game.
+	 * @param stage  The stage that is used to build visualization.
+	 * @param time  A int that represent the remaining time of each round in second.
 	 */
-	public Viewer(String mode, Board board, Stage stage, int time) {
+	public Viewer(String mode, Board board, Controller controller, Stage stage, int time) {
 		this.mode = mode;
 		this.board = board;
 		this.stage = stage;
 		this.round = "Red";
+		this.time = time;
 		this.timer = new Timer(time, this, this.stage);
 		initUI();
 	}
 
+	/**
+	 * Initialize the UI to build the visualization of the game Chinese Chess.
+	 */
 	private void initUI() {
-
 		BorderPane borderPane = new BorderPane();
 		borderPane.setStyle("-fx-background-color: #121212;");
 
@@ -96,7 +112,7 @@ public class Viewer {
 		AnchorPane anchorPane = new AnchorPane();
 		anchorPane.setBackground(new Background(backgroundImage));
 
-		ButtonFactory buttonFactory = new ButtonFactory(anchorPane);
+		ButtonFactory buttonFactory = new ButtonFactory(anchorPane, controller);
 
 		switch (mode) {
 			case "Timed Mode" -> {
@@ -151,7 +167,7 @@ public class Viewer {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param scorer
 	 */
 	public void report(Scorer scorer) {
@@ -183,21 +199,32 @@ public class Viewer {
 		}
 	}
 
+	/**
+	 * The method will return the mode of the game.
+	 * @return this.mode
+	 */
 	public String getMode() {
 		return this.mode;
 	}
 	/**
-	 * 
-	 * @param
+	 * The method drawTimer() will update the information displayed,
+	 * and update the time information depends on the timer.
 	 */
 	public void drawTimer() {
 		label.setText(String.format("Round: %s" + "\nCountdown: %d", round, timer.getCounter()));
 	}
 
+	/**
+	 * The method drawScorer() will update the information displayed,
+	 * and update the score information depends on the scorer.
+	 */
 	public void drawScorer() {
 		label.setText(String.format("Red Score: %d" + "\nBlack Score: %d", scorer.getFactionScore("Red"), scorer.getFactionScore("Black")));
 	}
 
+	/**
+	 * The method update_classic() will update the information displayed.
+	 */
 	public void update_classic(){
 		label.setText(String.format("Round: %s", round));
 	}
