@@ -12,7 +12,6 @@ public class Controller {
 	private Board board;
 	private Player[] players;
 	private String mode;
-	private Viewer viewer;
 	private Scorer scorer;
 
 	/**
@@ -98,14 +97,12 @@ public class Controller {
 	 * @param board the board the players are playing
 	 * @param players the players of the game
 	 * @param mode mode of the game
-	 * @param viewer add viewer to the controller
 	 * @param scorer add scorer to the controller
 	 */
-	public Controller(Board board, Player[] players, String mode, Viewer viewer, Scorer scorer) {
+	public Controller(Board board, Player[] players, String mode, Scorer scorer) {
 		this.board = board;
 		this.players = players;
 		this.mode = mode;
-		this.viewer = viewer;
 		if (scorer != null){
 			this.scorer = scorer;
 		}

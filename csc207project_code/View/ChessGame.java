@@ -1,7 +1,9 @@
 package View;
 
+import Control.Controller;
 import Control.Scorer;
 import Model.Board;
+import Model.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -76,7 +78,13 @@ public class ChessGame {
 		classicMode.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent actionEvent) {
-				Viewer viewer1 = new Viewer("Classic Mode", board, stage);
+				Player[] players = new Player[2];
+				Player playerRed = new Player("Red");
+				Player playerBlack = new Player("Black");
+				players[0] = playerRed;
+				players[1] = playerBlack;
+				Controller controller = new Controller(board, players, "Classic Mode", null);
+				Viewer viewer1 = new Viewer("Classic Mode", board, controller, stage);
 			}
 		});
 
@@ -114,7 +122,13 @@ public class ChessGame {
 								numberFormatErrorLabel.setText("Is not positive!");
 							}
 							else{
-								Viewer viewer1 = new Viewer("Timed Mode", board, stage, intTime);
+								Player[] players = new Player[2];
+								Player playerRed = new Player("Red");
+								Player playerBlack = new Player("Black");
+								players[0] = playerRed;
+								players[1] = playerBlack;
+								Controller controller = new Controller(board, players, "Timed Mode", null);
+								Viewer viewer1 = new Viewer("Timed Mode", board, controller, stage, intTime);
 							}
 						} catch (NumberFormatException e){
 							numberFormatErrorLabel.setText("Not an integer!");
@@ -134,7 +148,13 @@ public class ChessGame {
 			@Override
 			public void handle(ActionEvent actionEvent) {
 				Scorer scorer = new Scorer();
-				Viewer viewer1 = new Viewer("Scored Mode", board, stage, scorer);
+				Player[] players = new Player[2];
+				Player playerRed = new Player("Red");
+				Player playerBlack = new Player("Black");
+				players[0] = playerRed;
+				players[1] = playerBlack;
+				Controller controller = new Controller(board, players, "Scored Mode", scorer);
+				Viewer viewer1 = new Viewer("Scored Mode", board, controller, stage, scorer);
 
 			}
 		});
