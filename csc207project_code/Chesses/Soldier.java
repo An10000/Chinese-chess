@@ -23,9 +23,10 @@ public class Soldier extends Chess implements Moveable, getNextPosition {
 	 * @param board the board we are moving on.
 	 */
 	public void move(Location destination, Board board) {
-		Location oldLocation = this.getLocation();
+		board.removeChessAt(getLocation());
+		this.getLocation().setRow(destination.getRow());
+		this.getLocation().setCol(destination.getCol());
 		board.setChessAt(this, destination);
-		board.setChessAt(new NullChess(oldLocation, null, null), oldLocation);
 	}
 
 	/**

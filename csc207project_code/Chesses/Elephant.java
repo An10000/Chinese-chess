@@ -23,9 +23,21 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 	public void move(Location destination, Board board) {
 		// TODO - implement Elephant.move
 		board.removeChessAt(getLocation());
+		this.getLocation().setRow(destination.getRow());
+		this.getLocation().setCol(destination.getCol());
 		board.setChessAt(this, destination);
 	}
 
+
+
+	/**
+	 * Get All legal positions for Elephant.
+	 * It could only move within self-faction region.
+	 * it only moves diagonally in any 2 x 2 area within self-faction.
+	 * For example: 田, from bottom left to top right when there is other chess block in the middle of this region,
+	 * @param board the board the players are playing
+	 * @return all possible next locations the chess can move
+	 */
 	@Override
 	public ArrayList<Location> getNextPosition(Board board) {
 		ArrayList<Location> locations = new ArrayList<>();
@@ -51,7 +63,8 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 					if (moveindex.get(0) == -2
 							&& moveindex.get(1) == -2
 							&& board.getChessAt(after_location).getType() == null
-							&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black")){
+							&& ( board.getChessAt(new_location).getFaction() == null
+							|| board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black"))){
 						locations.add(new_location);
 					}
 
@@ -59,7 +72,8 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 					if (moveindex.get(0) == -2
 							&& moveindex.get(1) == 2
 							&& board.getChessAt(after_location).getType() == null
-							&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black")){
+							&& ( board.getChessAt(new_location).getFaction() == null
+							|| board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black"))){
 						locations.add(new_location);
 					}
 
@@ -67,7 +81,8 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 					if (moveindex.get(0) == 2
 							&& moveindex.get(1) == -2
 							&& board.getChessAt(after_location).getType() == null
-							&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black")){
+							&& ( board.getChessAt(new_location).getFaction() == null
+							|| board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black"))){
 						locations.add(new_location);
 					}
 
@@ -75,7 +90,8 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 					if (moveindex.get(0) == 2
 							&& moveindex.get(1) == 2
 							&& board.getChessAt(after_location).getType() == null
-							&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black")){
+							&& ( board.getChessAt(new_location).getFaction() == null
+							|| board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black"))){
 						locations.add(new_location);
 					}
 				}
@@ -95,7 +111,8 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 					if (moveindex.get(0) == -2
 							&& moveindex.get(1) == -2
 							&& board.getChessAt(after_location).getType() == null
-							&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("red")){
+							&& ( board.getChessAt(new_location).getFaction() == null
+							|| board.getChessAt(new_location).getFaction().equalsIgnoreCase("red"))){
 						locations.add(new_location);
 					}
 
@@ -103,7 +120,8 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 					if (moveindex.get(0) == -2
 							&& moveindex.get(1) == 2
 							&& board.getChessAt(after_location).getType() == null
-							&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("red")){
+							&& ( board.getChessAt(new_location).getFaction() == null
+							|| board.getChessAt(new_location).getFaction().equalsIgnoreCase("red"))){
 						locations.add(new_location);
 					}
 
@@ -111,7 +129,8 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 					if (moveindex.get(0) == 2
 							&& moveindex.get(1) == -2
 							&& board.getChessAt(after_location).getType() == null
-							&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("red")){
+							&& ( board.getChessAt(new_location).getFaction() == null
+							|| board.getChessAt(new_location).getFaction().equalsIgnoreCase("red"))){
 						locations.add(new_location);
 					}
 
@@ -119,13 +138,14 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 					if (moveindex.get(0) == 2
 							&& moveindex.get(1) == 2
 							&& board.getChessAt(after_location).getType() == null
-							&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("red")){
+							&& ( board.getChessAt(new_location).getFaction() == null
+							|| board.getChessAt(new_location).getFaction().equalsIgnoreCase("red"))){
 						locations.add(new_location);
 					}
 				}
 			}
 		}
-
+		System.out.println(locations);
 
 		return locations;
 

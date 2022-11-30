@@ -26,6 +26,18 @@ public class Horse extends Chess implements Moveable, getNextPosition {
 		board.setChessAt(this, destination);
 	}
 
+
+
+	/**
+	 * Get All legal positions for Horse
+	 * Pretty much like Elephant, but it can move any spot in the board.
+	 * However, it moves within a 2 x 1 area like 日.
+	 * For example, if Horse what to move from left bottom to top right in 日,
+	 * there should no other chess block in **front** of Horse.
+	 * Same rule when you rotate 日 90 degree, no other chess block in **front** of Horse between target chess and itself.
+	 * @param board the board the players are playing
+	 * @return all possible next locations the chess can move
+	 */
 	@Override
 	public ArrayList<Location> getNextPosition(Board board) {
 		ArrayList<Location> locations = new ArrayList<>();
@@ -86,18 +98,18 @@ public class Horse extends Chess implements Moveable, getNextPosition {
 						locations.add(new_location);
 					}
 				}
+				if (board.getChessAt(new_location).getType() != null &&(getFaction().equalsIgnoreCase("red")
+						&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("black"))){
+					locations.add(new_location);
+				}
+
+				else if (board.getChessAt(new_location).getType() != null && (getFaction().equalsIgnoreCase("black")
+						&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("red"))){
+					locations.add(new_location);
+				}
 			}
 
-			if (getFaction().equalsIgnoreCase("red")
-					&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("black")){
-				locations.add(new_location);
-			}
-
-			else if (getFaction().equalsIgnoreCase("black")
-					&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("red")) {
-				locations.add(new_location);
-			}
-
+			System.out.println(locations);
 
 		}
 

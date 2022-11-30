@@ -25,7 +25,14 @@ public class Advisor extends Chess implements Moveable, getNextPosition{
 
 
 
-
+	/**
+	 * Get All legal positions for Advisor.
+	 * For instance of a red Advisor, it could only
+	 * move within a 3 x 3 Area (row 8 to row 9, col 4 to row 6)
+	 * Also, it moves diagonally only step each round.
+	 * @param board the board the players are playing
+	 * @return all possible next locations the chess can move
+	 */
 	@Override
 	public ArrayList<Location> getNextPosition(Board board) {
 		ArrayList<Location> locations = new ArrayList<>();
