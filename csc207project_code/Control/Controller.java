@@ -77,7 +77,7 @@ public class Controller {
 			else{
 				Chess killed = moveRequest(board.getChessList()[clicks.get(0).getRow()][clicks.get(0).getCol()], location);
 				if (mode == "Scored Mode" && killed != null){
-					if (killed.getType() != "NullChess"){
+					if (killed.getType() != null){
 						scorer.addScore(killed);
 					}
 				}
