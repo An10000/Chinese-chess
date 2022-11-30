@@ -128,6 +128,7 @@ public class ChessGame {
 								players[1] = playerBlack;
 								Controller controller = new Controller(board, players, "Timed Mode", null);
 								Viewer viewer1 = new Viewer("Timed Mode", board, controller, stage, intTime);
+								dialog.close();
 							}
 						} catch (NumberFormatException e){
 							numberFormatErrorLabel.setText("Not an integer!");
