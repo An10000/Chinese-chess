@@ -22,6 +22,7 @@ public abstract class Chess implements Moveable, getNextPosition{
 		this.location = location;
 		this.faction = faction;
 		this.type = type;
+		this.alive = true;
 	}
 
 	/**

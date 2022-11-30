@@ -9,19 +9,15 @@ import java.util.Objects;
 
 public class Controller {
 
-	private Board board;
-	private Player[] players;
-	private String mode;
-	private Scorer scorer;
+	private Board board;// the board in the game.
+	private Player[] players;//players of the game
+	private String mode;//mode of the game
+	private Scorer scorer;// Scorer of the game if it is "Scored Mode". Null otherwise.
+	private ArrayList<Location> clicks;//record the clicks received.
 
-	/**
-	 *
-	 */
-	private ArrayList<Location> clicks;
-
-	public static final int OK = 0;
-	public static final int MOVED = 1;
-	public static final int INVALID = 2;
+	public static final int OK = 0;//it is one of the chess of our faction, it is "ok" to click that
+	public static final int MOVED = 1;//the chess has been moved. Now it is the opposite's turn!
+	public static final int INVALID = 2;//It is not your chess/it is a NullChess! You can't do that, please click again.
 	/**
 	 * request a move of a chess.
 	 * if the chess can move to the destination,
@@ -68,18 +64,19 @@ public class Controller {
 			return OK;
 		}
 		else if (board.getChessList()[location.getRow()][location.getCol()].getFaction() == null || !Objects.equals(board.getChessList()[location.getRow()][location.getCol()].getFaction(), faction)){
-			if (clicks.size() <= 1){//if not clicked previously
+			if (clicks.size() < 1){//if not clicked previously
 				clicks.clear();
 				return INVALID;
 			}
 			else{
-				Chess killed = moveRequest(board.getChessList()[clicks.get(1).getRow()][clicks.get(1).getCol()], clicks.get(0));
+				Chess killed = moveRequest(board.getChessList()[clicks.get(0).getRow()][clicks.get(0).getCol()], location);
 				if (mode == "Scored Mode" && killed != null){
 					if (killed.getType() != "NullChess"){
 						scorer.addScore(killed);
 					}
 				}
 				else if (killed == null){
+					clicks.clear();
 					return INVALID;
 				}
 				clicks.clear();
