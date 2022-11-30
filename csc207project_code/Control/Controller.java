@@ -15,9 +15,12 @@ public class Controller {
 	private Scorer scorer;// Scorer of the game if it is "Scored Mode". Null otherwise.
 	private ArrayList<Location> clicks;//record the clicks received.
 
+	private boolean checkMate;
+
 	public static final int OK = 0;//it is one of the chess of our faction, it is "ok" to click that
 	public static final int MOVED = 1;//the chess has been moved. Now it is the opposite's turn!
 	public static final int INVALID = 2;//It is not your chess/it is a NullChess! You can't do that, please click again.
+
 	/**
 	 * request a move of a chess.
 	 * if the chess can move to the destination,
@@ -85,6 +88,7 @@ public class Controller {
 				}
 				clicks.clear();
 //				System.out.println("moved");
+//				checkMate = board.checkMate();
 				return MOVED;
 			}
 		}
@@ -106,6 +110,7 @@ public class Controller {
 		this.board = board;
 		this.players = players;
 		this.mode = mode;
+		this.checkMate = false;
 		if (scorer != null){
 			this.scorer = scorer;
 		}
@@ -121,6 +126,14 @@ public class Controller {
 	 */
 	public ArrayList<Location> getClicks() {
 		return clicks;
+	}
+
+	/**
+	 * getter for checkmate. Get the status: if the game has checkmate?
+	 * @return checkMate
+	 */
+	public boolean isCheckMate() {
+		return checkMate;
 	}
 
 }
