@@ -23,8 +23,9 @@ public class Soldier extends Chess implements Moveable, getNextPosition {
 	 * @param board the board we are moving on.
 	 */
 	public void move(Location destination, Board board) {
-		board.removeChessAt(getLocation());
+		Location oldLocation = this.getLocation();
 		board.setChessAt(this, destination);
+		board.setChessAt(new NullChess(oldLocation, null, null), oldLocation);
 	}
 
 	/**
@@ -49,12 +50,15 @@ public class Soldier extends Chess implements Moveable, getNextPosition {
 				if (row < 0 || col < 0){
 					continue;
 				}
+				else if (row >= 10|| col >= 9){
+					continue;
+				}
 				Location location = new Location(row, col);
 				if (this.getLocation().getRow() > 4){
 					if (board.getChessAt(location).getFaction() == null){
 						locations.add(location);
 					}
-					else if (board.getChessAt(location).getFaction().equalsIgnoreCase("red")){
+					else if (board.getChessAt(location).getFaction().equalsIgnoreCase("black")){
 						locations.add(location);
 					}
 					break;
@@ -63,7 +67,7 @@ public class Soldier extends Chess implements Moveable, getNextPosition {
 					if (board.getChessAt(location).getFaction() == null){
 						locations.add(location);
 					}
-					else if (board.getChessAt(location).getFaction().equalsIgnoreCase("red")){
+					else if (board.getChessAt(location).getFaction().equalsIgnoreCase("black")){
 						locations.add(location);
 					}
 				}
@@ -83,12 +87,15 @@ public class Soldier extends Chess implements Moveable, getNextPosition {
 				if (row < 0 || col < 0){
 					continue;
 				}
+				else if (row >= 10|| col >= 9){
+					continue;
+				}
 				Location location = new Location(row, col);
 				if (this.getLocation().getRow() < 5){
 					if (board.getChessAt(location).getFaction() == null){
 						locations.add(location);
 					}
-					else if (board.getChessAt(location).getFaction().equalsIgnoreCase("Black")){
+					else if (board.getChessAt(location).getFaction().equalsIgnoreCase("red")){
 						locations.add(location);
 					}
 					break;
@@ -98,7 +105,7 @@ public class Soldier extends Chess implements Moveable, getNextPosition {
 					if (board.getChessAt(location).getFaction() == null){
 						locations.add(location);
 					}
-					else if (board.getChessAt(location).getFaction().equalsIgnoreCase("Black")){
+					else if (board.getChessAt(location).getFaction().equalsIgnoreCase("red")){
 						locations.add(location);
 					}
 				}
