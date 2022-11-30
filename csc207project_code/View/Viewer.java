@@ -51,6 +51,7 @@ public class Viewer {
 	public Viewer(String mode, Board board, Controller controller, Stage stage) {
 		this.mode = mode;
 		this.board = board;
+		this.controller = controller;
 		this.stage = stage;
 		this.round = "Red";
 		initUI();
@@ -67,6 +68,7 @@ public class Viewer {
 	public Viewer(String mode, Board board, Controller controller, Stage stage, Scorer scorer) {
 		this.mode = mode;
 		this.board = board;
+		this.controller = controller;
 		this.stage = stage;
 		this.round = "Red";
 		this.scorer = scorer;
@@ -84,6 +86,7 @@ public class Viewer {
 	public Viewer(String mode, Board board, Controller controller, Stage stage, int time) {
 		this.mode = mode;
 		this.board = board;
+		this.controller = controller;
 		this.stage = stage;
 		this.round = "Red";
 		this.time = time;
@@ -111,7 +114,7 @@ public class Viewer {
 		AnchorPane anchorPane = new AnchorPane();
 		anchorPane.setBackground(new Background(backgroundImage));
 
-		ButtonFactory buttonFactory = new ButtonFactory(anchorPane, controller);
+		ButtonFactory buttonFactory = new ButtonFactory(anchorPane, controller, this);
 
 		switch (mode) {
 			case "Timed Mode" -> {
