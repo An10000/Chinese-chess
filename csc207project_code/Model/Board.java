@@ -60,7 +60,7 @@ public class Board {
 		int col = location.getCol();
 		int row = location.getRow();
 		Chess oldChess = chessList[row][col];
-		chessList[row][col] = new NullChess(location, oldChess.getFaction(),oldChess.getType());
+		chessList[row][col] = new NullChess(location, null,null);
 	}
 
 	public static Board getInstance() {

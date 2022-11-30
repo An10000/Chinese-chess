@@ -22,81 +22,122 @@ public class Cannon extends Chess implements Moveable, getNextPosition {
 	public void move(Location destination, Board board) {
 		// TODO - implement Cannon.move
 		board.removeChessAt(getLocation());
+		this.getLocation().setRow(destination.getRow());
+		this.getLocation().setCol(destination.getCol());
 		board.setChessAt(this, destination);
 	}
 
+
+	/**
+	 * Get All legal positions for Cannon.
+	 * Cannon can move to almost every spot on the board when there is no chess blocked his way,
+	 * but only in vertical or horizontal direction.
+	 * If Cannon what to kill other chess, there must be another chess between the target chess and itself.
+	 * @param board the board the players are playing
+	 * @return all possible next locations the chess can move
+	 */
 	@Override
 	public ArrayList<Location> getNextPosition(Board board) {
 		//前进 towards
+		int curr = 0;
 		ArrayList<Location> locations = new ArrayList<>();
 		for (int i = this.getLocation().getRow(); i > 0; i--) {
+
 			Location new_location = new Location(i - 1, this.getLocation().getCol());
-			if (board.getChessAt(new_location).getType() == null){
+			if (board.getChessAt(new_location).getType() == null) {
 				locations.add(new_location);
 			}
-			if ((this.getFaction().equalsIgnoreCase("Red") && board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black"))
-					||(this.getFaction().equalsIgnoreCase("Black") && board.getChessAt(new_location).getFaction().equalsIgnoreCase("Red"))){
-				for (int j = i + 1; j > 0; j--){
-					Location after_location = new Location(j -1, getLocation().getCol());
-					if ((this.getFaction().equalsIgnoreCase("Red") && board.getChessAt(after_location).getFaction().equalsIgnoreCase("Black"))
-							||(this.getFaction().equalsIgnoreCase("Black") && board.getChessAt(after_location).getFaction().equalsIgnoreCase("Red"))){
-						locations.add(after_location);
-						break;
-					}
-				}
+			else {
+				curr = i;
+				break;
 			}
 		}
-		//后退 backwards
-		for (int i = this.getLocation().getRow(); i < 9; i++) {
-			Location new_location = new Location(i + 1, this.getLocation().getCol());
-			if (board.getChessAt(new_location).getType() == null){
-				locations.add(new_location);
-			}
-			if ((this.getFaction().equalsIgnoreCase("Red") && board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black"))
-					||(this.getFaction().equalsIgnoreCase("Black") && board.getChessAt(new_location).getFaction().equalsIgnoreCase("Red"))){
-				for (int j = i - 1; j < 9; j++){
-					Location after_location = new Location(j -1, getLocation().getCol());
-					if ((this.getFaction().equalsIgnoreCase("Red") && board.getChessAt(after_location).getFaction().equalsIgnoreCase("Black"))
-							||(this.getFaction().equalsIgnoreCase("Black") && board.getChessAt(after_location).getFaction().equalsIgnoreCase("Red"))){
-						locations.add(after_location);
-						break;
-					}
-				}
-			}
-		}
-		//left
-		for (int i = this.getLocation().getCol(); i > 0; i--) {
-			Location new_location = new Location(getLocation().getRow(), i - 1);
-			if (board.getChessAt(new_location).getType() == null){
-				locations.add(new_location);
-			}
-			if ((this.getFaction().equalsIgnoreCase("Red") && board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black"))
-					||(this.getFaction().equalsIgnoreCase("Black") && board.getChessAt(new_location).getFaction().equalsIgnoreCase("Red"))){
-				for (int j = i - 1; j > 0; j--){
-					Location after_location = new Location(new_location.getRow(), j - 1);
-					if ((this.getFaction().equalsIgnoreCase("Red") && board.getChessAt(after_location).getFaction().equalsIgnoreCase("Black"))
-							||(this.getFaction().equalsIgnoreCase("Black") && board.getChessAt(after_location).getFaction().equalsIgnoreCase("Red"))){
-						locations.add(after_location);
-						break;
-					}
+		System.out.println("curr: " +curr);
+		for (int j = curr - 2; j > 0; j--) {
+			Location after_location = new Location(j - 1, getLocation().getCol());
+			if ((board.getChessAt(after_location).getType() != null && !board.getChessAt(after_location).getType().equalsIgnoreCase(getType()))) {
+				if (!locations.contains(after_location)) {
+					locations.add(after_location);
+					break;
 				}
 			}
 		}
 
-		for (int i = this.getLocation().getCol(); i < 8; i++) {
-			Location new_location = new Location(getLocation().getRow(), i + 1);
-			if (board.getChessAt(new_location).getType() == null){
+
+
+		//------------------------------------------------------
+        //后退 backwards
+		curr = 0;
+		for (int i = this.getLocation().getRow(); i < 9; i++) {
+
+			Location new_location = new Location(i + 1, this.getLocation().getCol());
+			if (board.getChessAt(new_location).getType() == null) {
 				locations.add(new_location);
 			}
-			if ((this.getFaction().equalsIgnoreCase("Red") && board.getChessAt(new_location).getFaction().equalsIgnoreCase("Black"))
-					||(this.getFaction().equalsIgnoreCase("Black") && board.getChessAt(new_location).getFaction().equalsIgnoreCase("Red"))){
-				for (int j = i + 1; j < 8; j++){
-					Location after_location = new Location(new_location.getRow(), j + 1);
-					if ((this.getFaction().equalsIgnoreCase("Red") && board.getChessAt(after_location).getFaction().equalsIgnoreCase("Black"))
-							||(this.getFaction().equalsIgnoreCase("Black") && board.getChessAt(after_location).getFaction().equalsIgnoreCase("Red"))){
-						locations.add(after_location);
-						break;
-					}
+			else {
+				curr = i;
+				break;
+			}
+		}
+		for (int j = curr + 2; j < 9; j++) {
+			Location after_location = new Location(j + 1, getLocation().getCol());
+			if ((board.getChessAt(after_location).getType() != null && !board.getChessAt(after_location).getType().equalsIgnoreCase(getType()))) {
+				if (!locations.contains(after_location)) {
+					locations.add(after_location);
+					break;
+				}
+			}
+		}
+
+
+
+		//------------------------------------------------------
+		//left
+		curr = 0;
+		for (int i = this.getLocation().getCol(); i > 0; i--) {
+
+			Location new_location = new Location(this.getLocation().getRow(), i - 1);
+			if (board.getChessAt(new_location).getType() == null) {
+				locations.add(new_location);
+			}
+			else {
+				curr = i;
+				break;
+			}
+		}
+		for (int j = curr - 2; j > 0; j--) {
+			Location after_location = new Location(getLocation().getRow(), j - 1);
+			if ((board.getChessAt(after_location).getType() != null && !board.getChessAt(after_location).getType().equalsIgnoreCase(getType()))) {
+				if (!locations.contains(after_location)) {
+					locations.add(after_location);
+					break;
+				}
+			}
+		}
+
+
+
+
+		//------------------------------------------------------
+		//right
+		curr = 0;
+		for (int i = this.getLocation().getCol(); i < 8; i++) {
+
+			Location new_location = new Location(this.getLocation().getRow(), i + 1);
+			if (board.getChessAt(new_location).getType() == null) {
+				locations.add(new_location);
+			}
+			else {
+				curr = i;
+				break;
+			}
+		}
+		for (int j = curr + 2; j < 8; j++) {
+			Location after_location = new Location(getLocation().getRow(), j + 1);
+			if ((board.getChessAt(after_location).getType() != null && !board.getChessAt(after_location).getType().equalsIgnoreCase(getType()))) {
+				if (!locations.contains(after_location)) {
+					locations.add(after_location);
+					break;
 				}
 			}
 		}
