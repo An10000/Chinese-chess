@@ -38,7 +38,7 @@ public class Viewer {
 	private Stage stage;
 	private Board board;
 	private VBox vBox;
-
+//	private HBox hBox;
 	private Label label;
 
 	/**
@@ -144,8 +144,19 @@ public class Viewer {
 		}
 		vBox.setPadding(new Insets(20, 20, 20, 20));
 		vBox.setAlignment(Pos.TOP_CENTER);
-		vBox.setMaxSize(200,100);
-		vBox.setMinSize(200,100);
+		vBox.setMaxSize(200,150);
+		vBox.setMinSize(200,150);
+
+//		Label checkMate = new Label("");
+//		checkMate.setId("CheckMate");
+//		checkMate.setText("");
+//		checkMate.setFont(new Font(20));
+//		checkMate.setStyle("-fx-text-fill: #e8e6e3");
+//		hBox = new HBox(20, checkMate);
+//		hBox.setPadding(new Insets(20, 20, 20, 20));
+//		hBox.setAlignment(Pos.BOTTOM_CENTER);
+//		hBox.setMaxSize(200,50);
+//		hBox.setMinSize(200,50);
 
 		timeline = new Timeline(new KeyFrame(Duration.seconds(0.25), e -> updateBoard()));
 		timeline.setCycleCount(Timeline.INDEFINITE);
@@ -221,7 +232,7 @@ public class Viewer {
 	 * and update the score information depends on the scorer.
 	 */
 	public void drawScorer() {
-		label.setText(String.format("Red Score: %d" + "\nBlack Score: %d", scorer.getFactionScore("Red"), scorer.getFactionScore("Black")));
+		label.setText(String.format("Round: %s" +"\nRed Score: %d" + "\nBlack Score: %d", round, scorer.getFactionScore("Red"), scorer.getFactionScore("Black")));
 	}
 
 	/**
@@ -230,5 +241,9 @@ public class Viewer {
 	public void update_classic(){
 		label.setText(String.format("Round: %s", round));
 	}
+
+//	public void reportCheckMate() {
+//
+//	}
 
 }
