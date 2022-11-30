@@ -254,7 +254,7 @@ public class ButtonFactory {
                             special[prev].setGraphic(origin_view);
                         }
 
-                        Image select = new Image(selected);
+                        Image select = new Image(selected, 65, 65, true, true);
                         ImageView selected_view = new ImageView(select);
                         curr_chess.setGraphic(selected_view);
                         prev = curr;
