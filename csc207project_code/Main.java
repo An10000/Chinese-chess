@@ -11,7 +11,7 @@ public class Main extends Application {
 	/**
 	 * Main method
 	 *
-	 * @param args agument, if any
+	 * @param args argument, if any
 	 */
 	public static void main(String[] args) {
 		// TODO - implement Main.main
@@ -21,6 +21,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		this.stage = stage;
+		InitializeBoard initializeBoard = new InitializeBoard();
 		chessGame = new ChessGame(stage);
 
 	}
