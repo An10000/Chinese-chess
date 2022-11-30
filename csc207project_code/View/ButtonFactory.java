@@ -268,15 +268,17 @@ public class ButtonFactory {
                         deadChess.setMinSize(60,60);
 
                         buttonMap.put(deadChess, buttonMap.get(prevButton));
+                        anchorPane.getChildren().add(deadChess);
                         AnchorPane.setTopAnchor(deadChess, (Double) buttonMap.get(deadChess)[0]);
                         AnchorPane.setLeftAnchor(deadChess, (Double) buttonMap.get(deadChess)[1]);
 
                         deadChess.setStyle("-fx-background-color: rgba(0,0,0,0)");
                         deadChess.setOnAction(a -> handle_nullButton(deadChess));
 
-                        buttonMap.put(special[prev], buttonMap.get(curr_chess));
+                        buttonMap.put(prevButton, buttonMap.get(curr_chess));
+
                         AnchorPane.setTopAnchor(prevButton, (Double) buttonMap.get(prevButton)[0]);
-                        AnchorPane.setTopAnchor(prevButton, (Double) buttonMap.get(prevButton)[1]);
+                        AnchorPane.setLeftAnchor(prevButton, (Double) buttonMap.get(prevButton)[1]);
 
                         Image origin = new Image(prefix + prev + suffix, 65, 65, true, true);
                         ImageView origin_view = new ImageView(origin);
