@@ -58,14 +58,17 @@ public class Controller {
 	 * @return the type of the click, by int constant
 	 */
 	public int addClick(Location location, String faction){
+//		System.out.println(board);
 		if (board.getChessList()[location.getRow()][location.getCol()].getFaction() == faction){
 			clicks.clear();
 			clicks.add(location);
+//			System.out.println("selected");
 			return OK;
 		}
 		else if (board.getChessList()[location.getRow()][location.getCol()].getFaction() == null || !Objects.equals(board.getChessList()[location.getRow()][location.getCol()].getFaction(), faction)){
 			if (clicks.size() < 1){//if not clicked previously
 				clicks.clear();
+//				System.out.println("Invalid1");
 				return INVALID;
 			}
 			else{
@@ -77,14 +80,17 @@ public class Controller {
 				}
 				else if (killed == null){
 					clicks.clear();
+//					System.out.println("Invalid2");
 					return INVALID;
 				}
 				clicks.clear();
+//				System.out.println("moved");
 				return MOVED;
 			}
 		}
 		else{
 			clicks.clear();
+//			System.out.println("Invalid3");
 			return INVALID;
 		}
 	}

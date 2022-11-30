@@ -40,7 +40,6 @@ public class ChessGame {
 	 * @param stage the window which the mode selection will be happening.
 	 */
 	public ChessGame(Stage stage) {
-
 		Board board = Board.getInstance();
 
 		stage.setTitle("Chinese Chess");
@@ -155,7 +154,6 @@ public class ChessGame {
 				players[1] = playerBlack;
 				Controller controller = new Controller(board, players, "Scored Mode", scorer);
 				Viewer viewer1 = new Viewer("Scored Mode", board, controller, stage, scorer);
-
 			}
 		});
 		borderPane.setTop(controls);
