@@ -11,8 +11,7 @@ import javafx.scene.shape.Circle;
 import java.util.HashMap;
 
 public class ButtonFactory {
-    private AnchorPane anchorPane
-            ;
+    private AnchorPane anchorPane;
     private HashMap<Button, Object[]> buttonMap;
     private Button[] special;
     private Controller controller;
@@ -279,6 +278,14 @@ public class ButtonFactory {
                         AnchorPane.setTopAnchor(prevButton, (Double) buttonMap.get(prevButton)[0]);
                         AnchorPane.setTopAnchor(prevButton, (Double) buttonMap.get(prevButton)[1]);
 
+                        Image origin = new Image(prefix + prev + suffix, 65, 65, true, true);
+                        ImageView origin_view = new ImageView(origin);
+                        prevButton.setGraphic(origin_view);
+
+//                        if (controller.isCheckMate()){
+//                            viewer.reportCheckMate();
+//                        }
+
                         prev = -1;
                         viewer.nextRound();
                     }
@@ -313,6 +320,10 @@ public class ButtonFactory {
                 AnchorPane.setLeftAnchor(prev_button, (Double) buttonMap.get(prev_button)[1]);
                 AnchorPane.setTopAnchor(null_button, (Double) buttonMap.get(null_button)[0]);
                 AnchorPane.setLeftAnchor(null_button, (Double) buttonMap.get(null_button)[1]);
+
+                Image origin = new Image("View/Graphics/" + prev + ".png", 65, 65, true, true);
+                ImageView origin_view = new ImageView(origin);
+                prev_button.setGraphic(origin_view);
 
                 prev = -1;
                 viewer.nextRound();
