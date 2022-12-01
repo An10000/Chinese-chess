@@ -65,6 +65,7 @@ public class Cannon extends Chess implements Moveable, getNextPosition {
 
 
 
+
 		//------------------------------------------------------
         //后退 backwards
 		curr = 0;
@@ -141,6 +142,8 @@ public class Cannon extends Chess implements Moveable, getNextPosition {
 				}
 			}
 		}
+		System.out.println(locations);
 		return locations;
+
 	}
 }

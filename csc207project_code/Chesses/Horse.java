@@ -58,13 +58,14 @@ public class Horse extends Chess implements Moveable, getNextPosition {
 		lst_index.add(move_index6);
 		lst_index.add(move_index7);
 		lst_index.add(move_index8);
+		System.out.println(board);
 
 		for (ArrayList<Integer> moveindex: lst_index) {
+
 			//new location
 			Location new_location = new Location(
 					getLocation().getRow() + moveindex.get(0),
 					getLocation().getCol() + moveindex.get(1));
-
 			if (new_location.getRow() <= 9
 					&& new_location.getRow() >= 0
 					&& new_location.getCol() <= 8
@@ -98,15 +99,15 @@ public class Horse extends Chess implements Moveable, getNextPosition {
 						locations.add(new_location);
 					}
 				}
-				if (board.getChessAt(new_location).getType() != null &&(getFaction().equalsIgnoreCase("red")
-						&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("black"))){
-					locations.add(new_location);
-				}
 
-				else if (board.getChessAt(new_location).getType() != null && (getFaction().equalsIgnoreCase("black")
-						&& board.getChessAt(new_location).getFaction().equalsIgnoreCase("red"))){
-					locations.add(new_location);
-				}
+			}
+			if (new_location.getRow() <= 9
+					&& new_location.getRow() >= 0
+					&& new_location.getCol() <= 8
+					&& new_location.getCol() >= 0
+					&& board.getChessAt(new_location).getType() != null
+					&& !(board.getChessAt(new_location).getFaction().equalsIgnoreCase(getFaction()))){
+				locations.add(new_location);
 			}
 
 			System.out.println(locations);

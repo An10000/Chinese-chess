@@ -35,7 +35,11 @@ public class General extends Chess implements Moveable, getNextPosition {
 	 * Get All legal positions for General.
 	 * For instance of a red General, it could only
 	 * move within a 3 x 3 Area (row 8 to row 9, col 4 to row 6) like Advisor.
-	 * But only moving horizontally and vertically with only one step each round.
+	 * Only moving horizontally and vertically with only one step each round.
+	 * Special move: if there is no other chess between self-faction General
+	 * and enemy-faction General in the same col,
+	 * then we can directly kill the enemy-faction General,
+	 * thus this location need to be counted as well.
 	 * @param board the board the players are playing
 	 * @return all possible next locations the chess can move
 	 */
@@ -81,9 +85,41 @@ public class General extends Chess implements Moveable, getNextPosition {
 				}
 			}
 		}
+		if (get_all_chess_col(board).size() == 1
+				&& get_all_chess_col(board).get(0).getType().equalsIgnoreCase("general")
+				&& !(board.getChessAt(get_all_chess_col(board).get(0).getLocation()).getFaction().equalsIgnoreCase(getFaction()))){
+			locations.add(get_all_chess_col(board).get(0).getLocation());
+		}
+
+
 		return locations;
 
+	}
 
+
+	private ArrayList<Chess> get_all_chess_col(Board board){
+		ArrayList<Chess> chesses = new ArrayList<>();
+		if (getFaction().equalsIgnoreCase("red")) {
+			for (int i = getLocation().getRow() - 1; i >= 0; i--) {
+				Location location = new Location(i, getLocation().getCol());
+				if (board.getChessAt(location).getType() != null) {
+					chesses.add(board.getChessAt(location));
+				}
+			}
+		}
+		else if (getFaction().equalsIgnoreCase("Black")) {
+			for (int i = getLocation().getRow() + 1; i <= 9; i++) {
+				Location location = new Location(i, getLocation().getCol());
+				if (board.getChessAt(location).getType() != null) {
+					chesses.add(board.getChessAt(location));
+				}
+			}
+		}
+
+
+		return chesses;
 
 	}
+
+
 }
