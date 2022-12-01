@@ -50,11 +50,11 @@ public class Advisor extends Chess implements Moveable, getNextPosition{
 				Location location = new Location(this.getLocation().getRow() + move_index.get(0)
 						, this.getLocation().getCol() + move_index.get(1));
 				if ((this.getLocation().getRow() + move_index.get(0) <= 9
-						&& this.getLocation().getRow() + move_index.get(0) >= 8
+						&& this.getLocation().getRow() + move_index.get(0) >= 7
 						&& this.getLocation().getCol() + move_index.get(1) >= 3
 						&& this.getLocation().getCol() + move_index.get(1) <= 5)
 						&& ( board.getChessAt(location).getFaction() == null
-								||board.getChessAt(location).getFaction().equalsIgnoreCase("Black"))) {
+						||board.getChessAt(location).getFaction().equalsIgnoreCase("Black"))) {
 
 					locations.add(location);
 				}

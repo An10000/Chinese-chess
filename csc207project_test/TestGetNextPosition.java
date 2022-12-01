@@ -17,7 +17,6 @@ public class TestGetNextPosition {
 
     public boolean isEqualIgnorOrder(ArrayList<Location> actual, ArrayList<Location> expect){
         if (actual.size() != expect.size()){
-            System.out.println(expect);
             return false;
         }
         else {
@@ -35,7 +34,6 @@ public class TestGetNextPosition {
         //"Red Advisor"
         Location chess_location = new Location(9, 3);
         Advisor advisor = new Advisor(chess_location, "Red", "Advisor");
-//        System.out.println(Board.getInstance());
         ArrayList<Location> legal_locations = new ArrayList<>();
         Location location1 = new Location(8, 4);
         legal_locations.add(location1);
@@ -52,7 +50,6 @@ public class TestGetNextPosition {
         Location location2 = new Location(1, 4);
         legal_locations1.add(location2);
         ArrayList<Location> res1 = advisor1.getNextPosition(Board.getInstance());
-//        System.out.println(res1);
         boolean f1 = isEqualIgnorOrder(res1, legal_locations1);
         assertTrue(f1);
     }
@@ -88,7 +85,6 @@ public class TestGetNextPosition {
         legal_locations1.add(location11);
         legal_locations1.add(location12);
         ArrayList<Location> res1 = cannon.getNextPosition(initializeBoard.getBoard());
-//        System.out.println(res1);
         boolean f1 = isEqualIgnorOrder(res1, legal_locations1);
         assertTrue(f1);
     }
@@ -100,7 +96,6 @@ public class TestGetNextPosition {
         Location location_move = new Location(8, 4);
         general.move(location_move,Board.getInstance());
         ArrayList<Location> legal_locations1 = new ArrayList<>();
-        System.out.println(Board.getInstance());
         ArrayList<Location> res1 = general.getNextPosition(Board.getInstance());
         Location location1 = new Location(8, 3);
         Location location2 = new Location(8,5);

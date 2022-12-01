@@ -41,9 +41,7 @@ public class Chariot extends Chess implements Moveable, getNextPosition {
 	public ArrayList<Location> getNextPosition(Board board) {
 		ArrayList<Location> locations = new ArrayList<>();
 		//前进 towards
-		System.out.println(board);
 		for (int i = this.getLocation().getRow(); i > 0; i--) {
-			System.out.println(i);
 			Location new_location = new Location(i - 1, this.getLocation().getCol());
 			if (board.getChessAt(new_location).getType() == null){
 				locations.add(new_location);
@@ -52,7 +50,6 @@ public class Chariot extends Chess implements Moveable, getNextPosition {
 				locations.add(new_location);
 			}
 			else{
-				System.out.println("jinlaile");
 				break;
 			}
 		}
@@ -101,7 +98,6 @@ public class Chariot extends Chess implements Moveable, getNextPosition {
 			}
 		}
 
-		System.out.println(locations);
 
 
 

@@ -45,7 +45,6 @@ public class General extends Chess implements Moveable, getNextPosition {
 	 */
 	@Override
 	public ArrayList<Location> getNextPosition(Board board) {
-//		return null;
 		ArrayList<Location> locations = new ArrayList<>();
 		ArrayList<ArrayList<Integer>> lst_index = new ArrayList<>();
 		ArrayList<Integer> move_index1 = new ArrayList<>(Arrays.asList(-1, 0));
@@ -91,7 +90,6 @@ public class General extends Chess implements Moveable, getNextPosition {
 			locations.add(get_all_chess_col(board).get(0).getLocation());
 		}
 
-
 		return locations;
 
 	}
@@ -115,7 +113,6 @@ public class General extends Chess implements Moveable, getNextPosition {
 				}
 			}
 		}
-
 
 		return chesses;
 

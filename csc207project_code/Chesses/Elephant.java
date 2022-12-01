@@ -102,8 +102,8 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 			for (ArrayList<Integer> moveindex : lst_index) {
 				Location new_location = new Location(getLocation().getRow() + moveindex.get(0),
 						getLocation().getCol() + moveindex.get(1));
-				if (new_location.getRow() >= 5
-						&& new_location.getRow() <= 9
+				if (new_location.getRow() >= 0
+						&& new_location.getRow() <= 4
 						&& new_location.getCol() >= 0
 						&& new_location.getCol() <= 8
 						&& board.getChessAt(new_location).getType() == null) {
@@ -145,8 +145,6 @@ public class Elephant extends Chess implements Moveable, getNextPosition {
 				}
 			}
 		}
-		System.out.println(locations);
-
 		return locations;
 
 
