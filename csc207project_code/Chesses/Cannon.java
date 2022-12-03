@@ -52,10 +52,9 @@ public class Cannon extends Chess implements Moveable, getNextPosition {
 				break;
 			}
 		}
-		System.out.println("curr: " +curr);
-		for (int j = curr - 2; j > 0; j--) {
-			Location after_location = new Location(j - 1, getLocation().getCol());
-			if ((board.getChessAt(after_location).getType() != null && !board.getChessAt(after_location).getType().equalsIgnoreCase(getType()))) {
+		for (int j = curr - 2; j >= 0; j--) {
+			Location after_location = new Location(j, getLocation().getCol());
+			if ((board.getChessAt(after_location).getType() != null && !(board.getChessAt(after_location).getFaction().equalsIgnoreCase(getFaction())))) {
 				if (!locations.contains(after_location)) {
 					locations.add(after_location);
 					break;
@@ -67,7 +66,7 @@ public class Cannon extends Chess implements Moveable, getNextPosition {
 
 
 		//------------------------------------------------------
-        //后退 backwards
+		//后退 backwards
 		curr = 0;
 		for (int i = this.getLocation().getRow(); i < 9; i++) {
 
@@ -80,9 +79,9 @@ public class Cannon extends Chess implements Moveable, getNextPosition {
 				break;
 			}
 		}
-		for (int j = curr + 2; j < 9; j++) {
-			Location after_location = new Location(j + 1, getLocation().getCol());
-			if ((board.getChessAt(after_location).getType() != null && !board.getChessAt(after_location).getType().equalsIgnoreCase(getType()))) {
+		for (int j = curr + 2; j <= 9; j++) {
+			Location after_location = new Location(j, getLocation().getCol());
+			if ((board.getChessAt(after_location).getType() != null && !(board.getChessAt(after_location).getFaction().equalsIgnoreCase(getFaction())))){
 				if (!locations.contains(after_location)) {
 					locations.add(after_location);
 					break;
@@ -106,9 +105,9 @@ public class Cannon extends Chess implements Moveable, getNextPosition {
 				break;
 			}
 		}
-		for (int j = curr - 2; j > 0; j--) {
-			Location after_location = new Location(getLocation().getRow(), j - 1);
-			if ((board.getChessAt(after_location).getType() != null && !board.getChessAt(after_location).getType().equalsIgnoreCase(getType()))) {
+		for (int j = curr - 2; j >= 0; j--) {
+			Location after_location = new Location(getLocation().getRow(), j);
+			if ((board.getChessAt(after_location).getType() != null && !(board.getChessAt(after_location).getFaction().equalsIgnoreCase(getFaction())))) {
 				if (!locations.contains(after_location)) {
 					locations.add(after_location);
 					break;
@@ -123,7 +122,6 @@ public class Cannon extends Chess implements Moveable, getNextPosition {
 		//right
 		curr = 0;
 		for (int i = this.getLocation().getCol(); i < 8; i++) {
-
 			Location new_location = new Location(this.getLocation().getRow(), i + 1);
 			if (board.getChessAt(new_location).getType() == null) {
 				locations.add(new_location);
@@ -133,16 +131,16 @@ public class Cannon extends Chess implements Moveable, getNextPosition {
 				break;
 			}
 		}
-		for (int j = curr + 2; j < 8; j++) {
-			Location after_location = new Location(getLocation().getRow(), j + 1);
-			if ((board.getChessAt(after_location).getType() != null && !board.getChessAt(after_location).getType().equalsIgnoreCase(getType()))) {
+		for (int j = curr + 2; j <= 8; j++) {
+			Location after_location = new Location(getLocation().getRow(), j);
+			if ((board.getChessAt(after_location).getType() != null && !(board.getChessAt(after_location).getFaction().equalsIgnoreCase(getFaction())))) {
 				if (!locations.contains(after_location)) {
 					locations.add(after_location);
 					break;
 				}
 			}
 		}
-		System.out.println(locations);
+		locations.remove(getLocation());
 		return locations;
 
 	}

@@ -23,6 +23,8 @@ public class Horse extends Chess implements Moveable, getNextPosition {
 	public void move(Location destination, Board board) {
 		// TODO - implement Horse.move
 		board.removeChessAt(getLocation());
+		this.getLocation().setRow(destination.getRow());
+		this.getLocation().setCol(destination.getCol());
 		board.setChessAt(this, destination);
 	}
 
@@ -58,7 +60,6 @@ public class Horse extends Chess implements Moveable, getNextPosition {
 		lst_index.add(move_index6);
 		lst_index.add(move_index7);
 		lst_index.add(move_index8);
-		System.out.println(board);
 
 		for (ArrayList<Integer> moveindex: lst_index) {
 
@@ -109,8 +110,6 @@ public class Horse extends Chess implements Moveable, getNextPosition {
 					&& !(board.getChessAt(new_location).getFaction().equalsIgnoreCase(getFaction()))){
 				locations.add(new_location);
 			}
-
-			System.out.println(locations);
 
 		}
 
