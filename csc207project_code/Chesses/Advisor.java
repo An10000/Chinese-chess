@@ -19,6 +19,8 @@ public class Advisor extends Chess implements Moveable, getNextPosition{
 	public void move(Location destination, Board board) {
 		// TODO - implement Advisor.move
 		board.removeChessAt(getLocation());
+		this.getLocation().setRow(destination.getRow());
+		this.getLocation().setCol(destination.getCol());
 		board.setChessAt(this, destination);
 	}
 
