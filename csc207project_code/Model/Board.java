@@ -16,7 +16,10 @@ public class Board {
 		for (Chess[] chessrow: chessList){
 			for (Chess chess: chessrow){
 				for (Location location: chess.getNextPosition(this)){
-					if (this.getChessAt(location).getType().equals("General")){
+					if (this.getChessAt(location).getType() == null){
+						continue;
+					}
+					else if (this.getChessAt(location).getType().equals("General")){
 						if (!this.getChessAt(location).getFaction().equals(chess.getFaction())){
 							return true;
 						}

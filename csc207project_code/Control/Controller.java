@@ -20,6 +20,7 @@ public class Controller {
 	public static final int OK = 0;//it is one of the chess of our faction, it is "ok" to click that
 	public static final int MOVED = 1;//the chess has been moved. Now it is the opposite's turn!
 	public static final int INVALID = 2;//It is not your chess/it is a NullChess! You can't do that, please click again.
+	public static final int GAMEEND = 3;// Game ends! one of General is killed
 
 	/**
 	 * request a move of a chess.
@@ -55,6 +56,7 @@ public class Controller {
 	 * if the click is on an empty space or an enemy chess, then
 	 *     if he has already clicked on one of his own chesses, try if the movement is possible by calling moveRequest
 	 *     if not, it is INVALID
+	 *     if it killed general or get more than 10 in scored mode, then GAMEEND
 	 * if the click is not on any chess, then INVALID
 	 * @param location The location the user clicked
 	 * @param faction The faction the user is currently at
@@ -76,7 +78,7 @@ public class Controller {
 			}
 			else{
 				Chess killed = moveRequest(board.getChessList()[clicks.get(0).getRow()][clicks.get(0).getCol()], location);
-				if (mode == "Scored Mode" && killed != null){
+				if (Objects.equals(mode, "Scored Mode") && killed != null){
 					if (killed.getType() != null){
 						scorer.addScore(killed);
 					}
@@ -86,9 +88,15 @@ public class Controller {
 //					System.out.println("Invalid2");
 					return INVALID;
 				}
+				else if (Objects.equals(killed.getType(), "General")){
+					if (!Objects.equals(mode, "Scored Mode")){
+						return GAMEEND;
+					}
+				}
 				clicks.clear();
 //				System.out.println("moved");
-//				checkMate = board.checkMate();
+				checkMate = board.checkMate();
+//				System.out.println(checkMate);
 				return MOVED;
 			}
 		}
