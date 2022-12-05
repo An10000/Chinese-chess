@@ -32,6 +32,7 @@ public class Controller {
 	 */
 	public Chess moveRequest(Chess chess, Location destination) {
 		ArrayList<Location> nextLoctions = chess.getNextPosition(board);
+//		System.out.println(nextLoctions);
 		if (nextLoctions.contains(destination)){
 			Chess killedChess = board.getChessAt(destination);
 			if (killedChess.getType() == null){
@@ -42,7 +43,6 @@ public class Controller {
 				chess.kill(killedChess);
 				return killedChess;
 			}
-
 		}else{
 			return null;
 		}
@@ -63,17 +63,22 @@ public class Controller {
 	 * @return the type of the click, by int constant
 	 */
 	public int addClick(Location location, String faction){
-//		System.out.println(board);
 		if (board.getChessList()[location.getRow()][location.getCol()].getFaction() == faction){
+//			System.out.println(board.getChessList()[location.getRow()][location.getCol()]);
+//			System.out.println(location);
+//			System.out.println(faction);
 			clicks.clear();
 			clicks.add(location);
+//			System.out.println("clicks: "+ clicks);
 //			System.out.println("selected");
+//			System.out.println(board);
 			return OK;
 		}
 		else if (board.getChessList()[location.getRow()][location.getCol()].getFaction() == null || !Objects.equals(board.getChessList()[location.getRow()][location.getCol()].getFaction(), faction)){
 			if (clicks.size() < 1){//if not clicked previously
 				clicks.clear();
 //				System.out.println("Invalid1");
+//				System.out.println(board);
 				return INVALID;
 			}
 			else{
@@ -81,15 +86,22 @@ public class Controller {
 				if (Objects.equals(mode, "Scored Mode") && killed != null){
 					if (killed.getType() != null){
 						scorer.addScore(killed);
+						if (scorer.getFactionScore("Red") >= 10||scorer.getFactionScore("Black") >= 10){
+//							System.out.println("gameend!");
+//							System.out.println(board);
+							return GAMEEND;
+						}
 					}
 				}
 				else if (killed == null){
 					clicks.clear();
 //					System.out.println("Invalid2");
+//					System.out.println(board);
 					return INVALID;
 				}
 				else if (Objects.equals(killed.getType(), "General")){
 					if (!Objects.equals(mode, "Scored Mode")){
+//						System.out.println(board);
 						return GAMEEND;
 					}
 				}
@@ -97,12 +109,14 @@ public class Controller {
 //				System.out.println("moved");
 				checkMate = board.checkMate();
 //				System.out.println(checkMate);
+//				System.out.println(board);
 				return MOVED;
 			}
 		}
 		else{
 			clicks.clear();
 //			System.out.println("Invalid3");
+//			System.out.println(board);
 			return INVALID;
 		}
 	}
