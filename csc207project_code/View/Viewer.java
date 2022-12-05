@@ -24,6 +24,8 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.Objects;
+
 public class Viewer {
 
 	private String mode;
@@ -40,6 +42,8 @@ public class Viewer {
 	private VBox vBox;
 //	private HBox hBox;
 	private Label label;
+	private Label checkMate;
+	private boolean end = false;
 
 	/**
 	 * Initializer of Viewer with Classic Mode.
@@ -116,6 +120,12 @@ public class Viewer {
 
 		ButtonFactory buttonFactory = new ButtonFactory(anchorPane, controller, this);
 
+		checkMate = new Label("");
+		checkMate.setId("CheckMate");
+		checkMate.setText("");
+		checkMate.setFont(new Font(20));
+		checkMate.setStyle("-fx-text-fill: #e8e6e3");
+
 		switch (mode) {
 			case "Timed Mode" -> {
 				label = new Label("");
@@ -123,7 +133,7 @@ public class Viewer {
 				label.setText(String.format("Round: %s" + "\nCountdown: %d", round, time));
 				label.setFont(new Font(20));
 				label.setStyle("-fx-text-fill: #e8e6e3");
-				vBox = new VBox(20, label);
+				vBox = new VBox(20, label, checkMate);
 			}
 			case "Scored Mode" -> {
 				label = new Label("");
@@ -131,7 +141,7 @@ public class Viewer {
 				label.setText(String.format("Round: %s" + "\nRed Score: 0" + "\nBlack Score: 0", round));
 				label.setFont(new Font(20));
 				label.setStyle("-fx-text-fill: #e8e6e3");
-				vBox = new VBox(20, label);
+				vBox = new VBox(20, label, checkMate);
 			}
 			case "Classic Mode" -> {
 				label = new Label("");
@@ -139,24 +149,13 @@ public class Viewer {
 				label.setText(String.format("Round: %s", round));
 				label.setFont(new Font(20));
 				label.setStyle("-fx-text-fill: #e8e6e3");
-				vBox = new VBox(20, label);
+				vBox = new VBox(20, label, checkMate);
 			}
 		}
 		vBox.setPadding(new Insets(20, 20, 20, 20));
 		vBox.setAlignment(Pos.TOP_CENTER);
-		vBox.setMaxSize(200,150);
-		vBox.setMinSize(200,150);
-
-//		Label checkMate = new Label("");
-//		checkMate.setId("CheckMate");
-//		checkMate.setText("");
-//		checkMate.setFont(new Font(20));
-//		checkMate.setStyle("-fx-text-fill: #e8e6e3");
-//		hBox = new HBox(20, checkMate);
-//		hBox.setPadding(new Insets(20, 20, 20, 20));
-//		hBox.setAlignment(Pos.BOTTOM_CENTER);
-//		hBox.setMaxSize(200,50);
-//		hBox.setMinSize(200,50);
+		vBox.setMaxSize(200,200);
+		vBox.setMinSize(200,200);
 
 		timeline = new Timeline(new KeyFrame(Duration.seconds(0.25), e -> updateBoard()));
 		timeline.setCycleCount(Timeline.INDEFINITE);
@@ -174,23 +173,11 @@ public class Viewer {
 		stage.show();
 	}
 
-	public void refresh() {
-		// TODO - implement Viewer.refresh
-		throw new UnsupportedOperationException();
-	}
-
 	/**
-	 *
-	 * @param scorer
+	 * The game end, report the winner of the game.
 	 */
-	public void report(Scorer scorer) {
-		// TODO - implement Viewer.report
-		throw new UnsupportedOperationException();
-	}
-
 	public void report() {
-		// TODO - implement Viewer.report
-		throw new UnsupportedOperationException();
+		checkMate.setText(String.format("%s wins!!", round));
 	}
 
 	public void nextRound() {
@@ -200,15 +187,25 @@ public class Viewer {
 		}
 	}
 
+	/**
+	 * Return the current round information.
+	 * @return this.round
+	 */
 	public String getRound() {
 		return this.round;
 	}
 
+	/**
+	 * Update the board information depends on the game mode.
+	 */
 	private void updateBoard() {
 		switch (mode) {
 			case "Timed Mode" -> drawTimer();
 			case "Scored Mode" -> drawScorer();
 			case "Classic Mode" -> update_classic();
+		}
+		if (this.end) {
+			report();
 		}
 	}
 
@@ -242,8 +239,32 @@ public class Viewer {
 		label.setText(String.format("Round: %s", round));
 	}
 
-//	public void reportCheckMate() {
-//
-//	}
+	/**
+	 * If checkmated, the information of checkmate will display.
+	 * @param check  A boolean value that is used to check checkmate.
+	 */
+	public void reportCheckMate(boolean check) {
+		if (check && !mode.equals("Scored Mode")) {
+			checkMate.setText("CHECKMATE!!");
+		}
+		else {
+			checkMate.setText("");
+		}
+	}
+
+	/**
+	 * End the current game.
+	 */
+	public void endGame(){
+		end = true;
+	}
+
+	/**
+	 * Return the status of ending information.
+	 * @return this.end
+	 */
+	public boolean checkEnd() {
+		return this.end;
+	}
 
 }
