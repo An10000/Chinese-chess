@@ -54,10 +54,8 @@ public class Timer {
 			count++;
 			System.out.println(count);
 			if (count == 4) {
-				System.out.println("run!");
 				counter--;
 				count = 0;
-				System.out.println(counter);
 			}
 			if (counter == 0) {
 				viewer.nextRound();
