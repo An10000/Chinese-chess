@@ -42,10 +42,9 @@ public class ButtonFactory {
     private void computeButtons(){
         double left = 195.5;
         double top = 18.0;
-        int count = 0;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                Object[] array = new Object[4];
+                Object[] array = new Object[3];
 
                 Button button = new Button();
                 button.setShape(new Circle(30));
@@ -59,7 +58,7 @@ public class ButtonFactory {
                 array[0] = button;
                 array[1] = top + i * 74.0;
                 array[2] = left + j * 75.0;
-                array[3] = new Location(i,j);
+                button.setId(i + "," + j);
                 buttonlist.add(array);
 
                 if (i == 0) {
@@ -93,7 +92,7 @@ public class ButtonFactory {
         top = 391.0;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                Object[] array = new Object[4];
+                Object[] array = new Object[3];
 
                 Button button = new Button();
                 button.setShape(new Circle(30));
@@ -107,7 +106,7 @@ public class ButtonFactory {
                 array[0] = button;
                 array[1] = top + i * 74.0;
                 array[2] = left + j * 75.0;
-                array[3] = new Location(i + 5,j);
+                button.setId((i + 5) + "," + j);
                 buttonlist.add(array);
 
                 if (i == 1) {
@@ -142,7 +141,7 @@ public class ButtonFactory {
         top = 18.0;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
-                Object[] array = new Object[4];
+                Object[] array = new Object[3];
 
                 Button button = new Button();
                 button.setShape(new Circle(30));
@@ -156,7 +155,7 @@ public class ButtonFactory {
                 array[0] = button;
                 array[1] = top + i * 74.0;
                 array[2] = left + j * 74.0;
-                array[3] = new Location(i,j + 5);
+                button.setId(i + "," + (j + 5));
                 buttonlist.add(array);
 
                 if (i == 0) {
@@ -188,7 +187,7 @@ public class ButtonFactory {
         top = 391.0;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
-                Object[] array = new Object[4];
+                Object[] array = new Object[3];
 
                 Button button = new Button();
                 button.setShape(new Circle(30));
@@ -202,7 +201,7 @@ public class ButtonFactory {
                 array[0] = button;
                 array[1] = top + i * 74.0;
                 array[2] = left + j * 74.0;
-                array[3] = new Location(i + 5,j + 5);
+                button.setId((i + 5) + "," + (j + 5));
                 buttonlist.add(array);
 
                 if (i == 1) {
@@ -251,15 +250,7 @@ public class ButtonFactory {
 
             curr_chess.setOnAction(e -> {
                 if (!viewer.checkEnd()) {
-                    int state = -1;
-                    Object[] target = new Object[0];
-                    for (Object[] obj : buttonlist) {
-                        if (obj[0].equals(curr_chess)){
-                            target = obj;
-                            state = controller.addClick((Location) obj[3], viewer.getRound());
-                            break;
-                        }
-                    }
+                    int state = controller.addClick(new Location(curr_chess.getId()), viewer.getRound());
                     switch (state) {
                         case 0 -> {
                             if (prev != -1) {
@@ -282,22 +273,30 @@ public class ButtonFactory {
                             deadChess.setMaxSize(60,60);
                             deadChess.setMinSize(60,60);
 
+                            int count = 0;
                             for (Object[] obj : buttonlist) {
                                 if (obj[0].equals(prevButton)) {
                                     obj[0] = deadChess;
                                     anchorPane.getChildren().add(deadChess);
                                     AnchorPane.setTopAnchor(deadChess, (double) obj[1]);
                                     AnchorPane.setLeftAnchor(deadChess, (double) obj[2]);
+                                    count++;
+                                }
+                                else if (obj[0].equals(curr_chess)) {
+                                    obj[0] = prevButton;
+                                    AnchorPane.setTopAnchor(prevButton, (double) obj[1]);
+                                    AnchorPane.setLeftAnchor(prevButton, (double) obj[2]);
+                                    count++;
+                                }
+                                if (count == 2){
                                     break;
                                 }
                             }
+                            deadChess.setId(prevButton.getId());
+                            prevButton.setId(curr_chess.getId());
 
                             deadChess.setStyle("-fx-background-color: rgba(0,0,0,0)");
                             deadChess.setOnAction(a -> handle_nullButton(deadChess));
-
-                            target[0] = prevButton;
-                            AnchorPane.setTopAnchor(prevButton, (double) target[1]);
-                            AnchorPane.setLeftAnchor(prevButton, (double) target[2]);
 
                             Image origin = new Image(prefix + prev + suffix, 65, 65, true, true);
                             ImageView origin_view = new ImageView(origin);
@@ -324,7 +323,6 @@ public class ButtonFactory {
                         }
                     }
                 }
-
             });
         }
     }
@@ -336,40 +334,32 @@ public class ButtonFactory {
      */
     private void handle_nullButton(Button null_button) {
         if (!viewer.checkEnd()) {
-            int state = -1;
-            Object[] target = new Object[0];
-            for (Object[] obj : buttonlist) {
-                if (obj[0].equals(null_button)){
-                    target = obj;
-                    state = controller.addClick((Location) obj[3], viewer.getRound());
-                    break;
-                }
-            }
+            int state = controller.addClick(new Location(null_button.getId()), viewer.getRound());
             switch (state) {
                 case 1 -> {
                     Button prev_button = special[prev];
-                    System.out.println("null_button (before) = ");
-                    System.out.println(target[1]);
-                    System.out.println(target[2]);
-                    System.out.println(target[3]);
-
+                    int count = 0;
                     for (Object[] obj : buttonlist) {
                         if (obj[0].equals(prev_button)) {
                             obj[0] = null_button;
-                            target[0] = prev_button;
                             AnchorPane.setTopAnchor(null_button, (Double) obj[1]);
                             AnchorPane.setLeftAnchor(null_button, (Double) obj[2]);
-                            System.out.println("null_button (after) = ");
-                            System.out.println(obj[1]);
-                            System.out.println(obj[2]);
-                            System.out.println(obj[3]);
+                            count++;
+                        }
+                        else if (obj[0].equals(null_button)) {
+                            obj[0] = prev_button;
+                            AnchorPane.setTopAnchor(prev_button, (double) obj[1]);
+                            AnchorPane.setLeftAnchor(prev_button, (double) obj[2]);
+                            count++;
+                        }
+                        if (count == 2) {
                             break;
                         }
                     }
 
-                    AnchorPane.setTopAnchor(prev_button, (double) target[1]);
-                    AnchorPane.setLeftAnchor(prev_button, (double) target[2]);
-
+                    String prevId = prev_button.getId();
+                    prev_button.setId(null_button.getId());
+                    null_button.setId(prevId);
 
                     Image origin = new Image("View/Graphics/" + prev + ".png", 65, 65, true, true);
                     ImageView origin_view = new ImageView(origin);
