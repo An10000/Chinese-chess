@@ -4,7 +4,6 @@ import Chesses.General;
 import Chesses.Horse;
 import Model.Board;
 import Model.Location;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
