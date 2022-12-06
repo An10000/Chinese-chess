@@ -21,4 +21,12 @@ public class TestChess {
         advisor1.setLocation(expectedLocation);
         assertEquals(expectedLocation, advisor1.getLocation());
     }
+
+    @Test
+    void testLocationString() {
+        String s = "1,7";
+        Location location1 = new Location(1, 7);
+        Location location2 = new Location(s);
+        assertEquals(location1, location2);
+    }
 }
